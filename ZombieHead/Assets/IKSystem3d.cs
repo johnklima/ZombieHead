@@ -5,7 +5,6 @@ using UnityEngine;
 public class IKSystem3d : MonoBehaviour
 {
     public Segment3d[] segments;
-    public int childcount = 0;
     public Transform target = null;
 
     public bool isReaching = false;
@@ -15,14 +14,15 @@ public class IKSystem3d : MonoBehaviour
     private Segment3d firstSegment = null;
 
     private bool wasDragging = false;
- 
+    protected int childcount = 0;
 
     // Use this for initialization
     void Awake()
     {
 
         //lets buffer our segements in an array
-        childcount = transform.childCount;
+        childcount = transform.childCount;           
+    
         segments = new Segment3d[childcount];
         int i = 0;
         foreach (Transform child in transform)
@@ -30,7 +30,7 @@ public class IKSystem3d : MonoBehaviour
             segments[i] = child.GetComponent<Segment3d>();
             i++;
         }
-
+        
 
         firstSegment = segments[0];
         lastSegment = segments[childcount - 1];

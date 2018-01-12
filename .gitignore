@@ -9,7 +9,8 @@
 [Zz]ombieHead/ProjectSettings
 [Zz]ombieHead/Temp
 [Zz]ombieHead/UnityPackageManager
-
+*.csproj
+*.sln
 
 # User-specific files
 *.suo
