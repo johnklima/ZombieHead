@@ -13,10 +13,14 @@ public class Segment3d : MonoBehaviour
     public Segment3d parent = null;
     public Segment3d child = null;
 
+    public float interpRate = 3;
+   
+
     void Awake()
     {
         //aquire the length of this segment - the dummy geometry will always be child zero
         length = transform.GetChild(0).localScale.z;
+
     }
 
     public void updateSegmentAndChildren()
@@ -55,7 +59,17 @@ public class Segment3d : MonoBehaviour
     
     public void pointAt(Vector3 target)
     {
-        transform.LookAt(target);
+        Quaternion a = transform.rotation;          //save it
+        transform.LookAt(target);                   //look at target
+        Quaternion b = transform.rotation;          //get new rotation
+        transform.rotation = a;                     //set it back
+        
+        //spherical interpolate
+        float t = Time.deltaTime;                   
+        Quaternion c = Quaternion.Slerp(a, b, t * interpRate);
+
+        transform.rotation = c;
+        
     }
 
     

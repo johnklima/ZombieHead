@@ -42,9 +42,7 @@ public abstract class StateNode {
 //our first "concrete" state
 public class IdleState : StateNode
 {
-
-
-
+    
     //constructor
     public IdleState()
     {
@@ -56,7 +54,7 @@ public class IdleState : StateNode
     {
 
         //if any child state is true, set my state and return
-        //do not continue to process state tree (this can be overridden if desired)
+        //do not continue to process state tree, back out from here
         if (advanceState(dt) == true)
         {
             //if any child state is true, I am false
@@ -68,7 +66,7 @@ public class IdleState : StateNode
 
         //lets just say I am true, which in fact I always am if none of my children are true
         //as IDLE is the first state under root
-
+        p_isInState = true;
         if (p_isInState)
         {
             //do something
