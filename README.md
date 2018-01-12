@@ -5,3 +5,4 @@ John Klima
 Geir Thomas 
 Alexander Birkeland
 Johnny Bernhart Nilsen
+Magnus Enar Myrvang
