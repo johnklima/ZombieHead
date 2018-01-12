@@ -14,7 +14,7 @@ public class IKSystem3d : MonoBehaviour
     private Segment3d firstSegment = null;
 
     private bool wasDragging = false;
-    protected int childcount = 0;
+    public int childcount = 0;
 
     // Use this for initialization
     void Awake()

@@ -35,11 +35,11 @@ public class charState : MonoBehaviour {
         if (Input.GetKey(KeyCode.DownArrow))
             z = z + speed * Time.deltaTime;
 
-        float y = transform.position.y;       
+        float y = transform.position.y;
 
         // place the dude
         //first  get the exact height
-        float goalY = terrain.GetComponent<TerrainMesh>().getHeightAt( new Vector3(x, 1, z) ) + heightOffset;
+        float goalY = 0;
 
         //and interp to position quickly
         if(Mathf.Abs(goalY - y) > 0.01f)

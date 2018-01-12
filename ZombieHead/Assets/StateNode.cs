@@ -44,7 +44,6 @@ public class IdleState : StateNode
 {
 
 
-    float m_idleChooseTimer = -1;
 
     //constructor
     public IdleState()

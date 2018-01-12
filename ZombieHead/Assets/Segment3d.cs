@@ -8,14 +8,15 @@ public class Segment3d : MonoBehaviour
     public Vector3 Apos = new Vector3(0, 0, 0);
     public Vector3 Bpos = new Vector3(0, 0, 0);
 
-    public float length = 0;
+    protected float length = 0;
 
     public Segment3d parent = null;
     public Segment3d child = null;
 
-    void Start()
+    void Awake()
     {
-       
+        //aquire the length of this segment - the dummy geometry will always be child zero
+        length = transform.GetChild(0).localScale.z;
     }
 
     public void updateSegmentAndChildren()
@@ -25,7 +26,7 @@ public class Segment3d : MonoBehaviour
 
         //update its children
         if (child)
-            child.updateSegment();
+            child.updateSegmentAndChildren();
     }
 
     public void updateSegment()
