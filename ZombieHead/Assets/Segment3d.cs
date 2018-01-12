@@ -19,7 +19,7 @@ public class Segment3d : MonoBehaviour
     void Awake()
     {
         //aquire the length of this segment - the dummy geometry will always be child zero
-        length = transform.GetChild(0).localScale.z;
+        length = transform.GetChild(0).localScale.z;   
 
     }
 

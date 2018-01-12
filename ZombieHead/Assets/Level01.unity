@@ -363,8 +363,8 @@ GameObject:
   m_Component:
   - component: {fileID: 489490481}
   - component: {fileID: 489490484}
-  - component: {fileID: 489490483}
   - component: {fileID: 489490482}
+  - component: {fileID: 489490483}
   m_Layer: 0
   m_Name: segmentGeometry
   m_TagString: Untagged
@@ -419,8 +419,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &489490483
-SphereCollider:
+--- !u!136 &489490483
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -428,8 +428,9 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
   m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &489490484
 MeshFilter:
@@ -493,8 +494,8 @@ GameObject:
   m_Component:
   - component: {fileID: 855650751}
   - component: {fileID: 855650754}
-  - component: {fileID: 855650753}
   - component: {fileID: 855650752}
+  - component: {fileID: 855650753}
   m_Layer: 0
   m_Name: segmentGeometry
   m_TagString: Untagged
@@ -549,8 +550,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &855650753
-SphereCollider:
+--- !u!136 &855650753
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -558,8 +559,9 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
   m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &855650754
 MeshFilter:
@@ -761,8 +763,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1624113678}
   - component: {fileID: 1624113681}
-  - component: {fileID: 1624113680}
   - component: {fileID: 1624113679}
+  - component: {fileID: 1624113680}
   m_Layer: 0
   m_Name: segmentGeometry
   m_TagString: Untagged
@@ -817,8 +819,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &1624113680
-SphereCollider:
+--- !u!136 &1624113680
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -826,8 +828,9 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
   m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &1624113681
 MeshFilter:
@@ -929,8 +932,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1830038978}
   - component: {fileID: 1830038981}
-  - component: {fileID: 1830038980}
   - component: {fileID: 1830038979}
+  - component: {fileID: 1830038980}
   m_Layer: 0
   m_Name: segmentGeometry
   m_TagString: Untagged
@@ -985,8 +988,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &1830038980
-SphereCollider:
+--- !u!136 &1830038980
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -994,8 +997,9 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
   m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &1830038981
 MeshFilter:
