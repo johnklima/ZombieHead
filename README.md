@@ -6,3 +6,4 @@ Geir Thomas
 Alexander Birkeland
 Johnny Bernhart Nilsen
 Edvinas Rimkus
+Fink Juhl - Technical Artist
