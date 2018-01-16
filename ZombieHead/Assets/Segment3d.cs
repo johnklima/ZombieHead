@@ -14,13 +14,15 @@ public class Segment3d : MonoBehaviour
     public Segment3d child = null;
 
     public float interpRate = 3;
-   
+
+    private IKSystem3d parentSystem;
+
 
     void Awake()
     {
         //aquire the length of this segment - the dummy geometry will always be child zero
-        length = transform.GetChild(0).localScale.z;   
-
+        length = transform.GetChild(0).localScale.z;
+        parentSystem = transform.GetComponentInParent<IKSystem3d>();
     }
 
     public void updateSegmentAndChildren()
@@ -63,10 +65,17 @@ public class Segment3d : MonoBehaviour
         transform.LookAt(target);                   //look at target
         Quaternion b = transform.rotation;          //get new rotation
         transform.rotation = a;                     //set it back
+
+
+        //if the system is in drag mode, we want to crank the interpolation
+        //otherwise, the chain is "lazy," it doesnt need to do anything
+        float ir = interpRate;
+        if (parentSystem.isDragging)
+            ir *= 10;
         
         //spherical interpolate
         float t = Time.deltaTime;                   
-        Quaternion c = Quaternion.Slerp(a, b, t * interpRate);
+        Quaternion c = Quaternion.Slerp(a, b, t * ir);
 
         transform.rotation = c;
         

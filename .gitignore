@@ -6,7 +6,7 @@
 
 #Unity
 [Zz]ombieHead/Library
-[Zz]ombieHead/ProjectSettings
+#[Zz]ombieHead/ProjectSettings
 [Zz]ombieHead/Temp
 [Zz]ombieHead/UnityPackageManager
 *.csproj
@@ -61,7 +61,7 @@ artifacts/
 *_p.c
 *_i.h
 *.ilk
-*.meta
+#*.meta
 *.obj
 *.pch
 *.pdb
@@ -295,3 +295,4 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+New Text Document.txt
