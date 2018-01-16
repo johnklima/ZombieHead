@@ -12,6 +12,7 @@ public class playerMotion : MonoBehaviour {
     public Vector3 moveForce = new Vector3(0, 0, 0);    //combined force of all axis from input for move
     public Vector3 totalForce = new Vector3(0, 0, 0);   //total of ALL forces applied
 
+   
 
     //player characteristics
     public float mass = 1.0f;
@@ -20,6 +21,7 @@ public class playerMotion : MonoBehaviour {
     public float lateralForce = 10.0f;                   //our position force (X,Z axis)
     public float consumption = 0.0f;                     //energy burn rate
     public float friction = 0.975f;                      //TODO: put into world property
+    public float lookRate = 3.0f;                        //interpolation rate for looking
 
     // Use this for initialization
     void Start () {
@@ -34,6 +36,8 @@ public class playerMotion : MonoBehaviour {
             handleInput();
             handleMovement();
         }
+
+        handleFacing();
 
         if (transform.position.y > 0.5f)        {
 
@@ -127,9 +131,9 @@ public class playerMotion : MonoBehaviour {
 
         bool ret = false;
 
-        if (transform.position.x > 14)
+        if (transform.position.x > 8)
         {
-            Vector3 pos = new Vector3(13.5f, transform.position.y, transform.position.z);
+            Vector3 pos = new Vector3(7.5f, transform.position.y, transform.position.z);
             transform.position = pos;
             velocity *= 0;
             ret = true;
@@ -158,6 +162,28 @@ public class playerMotion : MonoBehaviour {
 
         return ret;
 
+
+    }
+    void handleFacing()
+    {
+
+        //face the character in the direction of their velocity
+        Vector3 face = velocity.normalized;
+        pointAt(transform.position + face * 2.0f);
+        
+    }
+    public void pointAt(Vector3 target)
+    {
+        Quaternion a = transform.rotation;          //save it
+        transform.LookAt(target);                   //look at target
+        Quaternion b = transform.rotation;          //get new rotation
+        transform.rotation = a;                     //set it back
+        
+        //spherical interpolate
+        float t = Time.deltaTime;
+        Quaternion c = Quaternion.Slerp(a, b, t * lookRate);
+
+        transform.rotation = c;
 
     }
 

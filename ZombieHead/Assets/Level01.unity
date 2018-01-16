@@ -1640,7 +1640,7 @@ MonoBehaviour:
   mass: 1
   energy: 1
   verticalForce: 18
-  lateralForce: 10
+  lateralForce: 15
   consumption: 0
   friction: 0.977
 --- !u!1 &1793678011
