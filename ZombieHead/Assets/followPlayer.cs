@@ -23,13 +23,14 @@ public class followPlayer : MonoBehaviour {
         //force the camera to follow the ship
         float z = target.position.z;
         float x = camtarget.x;
-        float y = 2 * camtarget.y;
+        float y = camtarget.y;
 
         Vector3 campos = new Vector3(x, y, z);
 
         float t = Time.deltaTime;
-        transform.position = Vector3.Slerp(transform.position,campos, t * lookRate);
-        
+        campos = Vector3.Slerp(transform.position, campos, t * lookRate);
+        campos.Set(campos.x, campos.y, z);
+        transform.position = campos;
         pointAt(target.position);
 
     }

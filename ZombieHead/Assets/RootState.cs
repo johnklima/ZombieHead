@@ -7,17 +7,22 @@ public class RootState : MonoBehaviour {
 
     protected List<StateNode> m_childStates ;
 
+    public playerMotion playermotion; 
+
 
     // Use this for initialization prior to anything else happening
     void Awake () {
 
+        playermotion = transform.GetComponent<playerMotion>();
 
         m_childStates = new List<StateNode>();
 
         //we must always add at least one, if we want the graph to run
-        IdleState idlestate = new IdleState();
+        IdleState idlestate = new IdleState(this);        
         m_childStates.Add(idlestate);
 
+        WalkState walkstate = new WalkState(this);
+        idlestate.addChildState(walkstate);
 
         
     }
@@ -31,7 +36,10 @@ public class RootState : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
+        //update the values that my child states need
         
+
+
         //iterate the child states, calling advanceTime
         foreach (StateNode child in m_childStates)
         {

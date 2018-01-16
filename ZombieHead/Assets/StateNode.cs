@@ -11,8 +11,9 @@ public abstract class StateNode {
 
     //is it currently in this state?
     public bool p_isInState;
-    
-    
+    public RootState rootState;
+
+
     public void addChildState(StateNode state)
     {
 
@@ -44,8 +45,9 @@ public class IdleState : StateNode
 {
     
     //constructor
-    public IdleState()
+    public IdleState(RootState root)
     {
+        rootState = root;
         m_childStates = new List<StateNode>();
     }
 
@@ -70,6 +72,7 @@ public class IdleState : StateNode
         if (p_isInState)
         {
             //do something
+            Debug.Log("IN IDLE");
         }
         
         return p_isInState;
