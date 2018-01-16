@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class followShip : MonoBehaviour {
+public class followPlayer : MonoBehaviour {
 
     public Transform target;
 
@@ -17,7 +17,7 @@ public class followShip : MonoBehaviour {
     {
 
         //force the camera to follow the ship
-        transform.position = target.position + new Vector3(0, 3, -4);
+        transform.position = target.position + new Vector3(3, 2, 0);
         transform.LookAt(target);
 
     }
