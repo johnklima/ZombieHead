@@ -9,9 +9,10 @@ public class PlayerMotion : MonoBehaviour {
     public Vector3 velocity = new Vector3(0, 0, 0);             //current direction and speed of movement
     public Vector3 acceleration = new Vector3(0, 0, 0);         //movement controlled by player movement force and gravity
 
-    public Vector3 moveForce = new Vector3(0, 0, 0);    //combined force of all axis from input for move
-    public Vector3 totalForce = new Vector3(0, 0, 0);   //total of ALL forces applied
+    public Vector3 moveForce = new Vector3(0, 0, 0);            //combined force of all axis from input for move
+    public Vector3 totalForce = new Vector3(0, 0, 0);           //total of ALL forces applied
     
+    //character animation scripts triggered by state machine
     public AnimationScript walk;
     public AnimationScript idle;
     public AnimationScript jump;
@@ -37,16 +38,19 @@ public class PlayerMotion : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        if (handleRegion() == false)
+        //make sure we are within the defined bounds of our level
+        //isOutOfBounds returns True if we are out of bounds
+        if (isOutOfBounds() == false)
         {
+            //all good so do key input and movement
             handleInput();
             handleMovement();
         }
 
+        //we always deal with terrain and player facing
         handleTerrain();
         handleFacing();
-
-        
+                
  
     }
     private void LateUpdate()
@@ -58,7 +62,7 @@ public class PlayerMotion : MonoBehaviour {
     {
         
         //clear out the move force each frame
-        moveForce.Set(0, 0, 0);       
+        moveForce *= 0;       
 
         if (Input.GetKey(KeyCode.A) && energy > 0.0f)
         {
@@ -115,7 +119,7 @@ public class PlayerMotion : MonoBehaviour {
 
     }
 
-    bool handleRegion()
+    bool isOutOfBounds()
     {
         //keep the player within bounds
         /*
@@ -186,7 +190,7 @@ public class PlayerMotion : MonoBehaviour {
     void handleTerrain()
     {
 
-
+        //TODO: follow the level terrain with raycast or height map (depends on art assets)
         if (transform.position.y < groundOffset)
         {
             //I'm below the surface, so push me up 
