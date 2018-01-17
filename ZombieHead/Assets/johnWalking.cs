@@ -2,10 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class AnimationScript : MonoBehaviour
-{
-
-}
 
 public class JohnWalking : AnimationScript
 {

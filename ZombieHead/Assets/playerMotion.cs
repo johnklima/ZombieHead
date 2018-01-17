@@ -14,6 +14,7 @@ public class PlayerMotion : MonoBehaviour {
 
     public AnimationScript walk;
     public AnimationScript idle;
+    public AnimationScript jump;
 
     //player characteristics
     public float mass = 1.0f;

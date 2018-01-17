@@ -25,7 +25,7 @@ public class  JumpState: StateNode
             //if any child state is true, I am false
             p_isInState = false;
 
-            rootState.playermotion.idle.enabled = false;
+            rootState.playermotion.jump.enabled = false;
 
             //since a child state is true, return this fact!
             return true;
@@ -37,8 +37,8 @@ public class  JumpState: StateNode
         if (p_isInState)
         {
             //do something
-            Debug.Log("IN IDLE");
-            rootState.playermotion.idle.enabled = true;
+            Debug.Log("IN JUMP");
+            rootState.playermotion.jump.enabled = true;
         }
 
         return p_isInState;

@@ -2442,6 +2442,7 @@ GameObject:
   - component: {fileID: 1792661806}
   - component: {fileID: 1792661807}
   - component: {fileID: 1792661808}
+  - component: {fileID: 1792661809}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2481,6 +2482,7 @@ MonoBehaviour:
   totalForce: {x: 0, y: 0, z: 0}
   walk: {fileID: 1748714023}
   idle: {fileID: 1432391924}
+  jump: {fileID: 1792661809}
   mass: 1
   energy: 1
   verticalForce: 18
@@ -2488,6 +2490,7 @@ MonoBehaviour:
   consumption: 0
   friction: 0.977
   lookRate: 3
+  groundOffset: 1
 --- !u!114 &1792661808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2500,6 +2503,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playermotion: {fileID: 1792661807}
+--- !u!114 &1792661809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1792661805}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7b55b6937b5de54aac1b397369aa4ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1793678011
 GameObject:
   m_ObjectHideFlags: 0
