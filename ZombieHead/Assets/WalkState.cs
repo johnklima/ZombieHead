@@ -24,13 +24,23 @@ public class WalkState : StateNode {
             //if any child state is true, I am false
             p_isInState = false;
 
+            //disable the animation
+            rootState.playermotion.walk.enabled = false;
+
             //since a child state is true, return this fact!
             return true;
         }
 
         //Am I walking???
         p_isInState = false;
-        if(rootState.playermotion.velocity.magnitude > 0.5f)
+
+        //get the velocity
+        Vector3 velo = rootState.playermotion.velocity;
+
+        //remove the Y gravity component
+        velo.Set(velo.x, 0, velo.z);
+
+        if (velo.magnitude > 0.5f)
             p_isInState = true;
 
 
@@ -38,8 +48,15 @@ public class WalkState : StateNode {
         {
             //do something
             Debug.Log("IN WALKING");
+            rootState.playermotion.walk.enabled = true;
         }
+        else
+        {
+            //clean up my state
+            //disable the animation
+            rootState.playermotion.walk.enabled = false;
 
+        }
         return p_isInState;
     }
 

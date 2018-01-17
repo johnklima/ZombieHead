@@ -5,14 +5,14 @@ using UnityEngine;
 public class playerMotion : MonoBehaviour {
 
     //gravity in meters per second per second
-    static float GRAVITY_CONSTANT = -9.8f;              // -- for earth,  -1.6 for moon 
-    public Vector3 velocity = new Vector3(0, 0, 0);            //current direction and speed of movement
-    public Vector3 acceleration = new Vector3(0, 0, 0);        //movement controlled by player movement force and gravity
+    static float GRAVITY_CONSTANT = -9.8f;                      // -- for earth,  -1.6 for moon 
+    public Vector3 velocity = new Vector3(0, 0, 0);             //current direction and speed of movement
+    public Vector3 acceleration = new Vector3(0, 0, 0);         //movement controlled by player movement force and gravity
 
     public Vector3 moveForce = new Vector3(0, 0, 0);    //combined force of all axis from input for move
     public Vector3 totalForce = new Vector3(0, 0, 0);   //total of ALL forces applied
 
-   
+    public AnimationScript walk;
 
     //player characteristics
     public float mass = 1.0f;
@@ -31,29 +31,23 @@ public class playerMotion : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        if (handleGround() == false)
+        if (handleRegion() == false)
         {
             handleInput();
             handleMovement();
         }
 
+        handleTerrain();
         handleFacing();
 
-        if (transform.position.y > 0.5f)        {
-
-            //I'm in the air - state ?
-        }
-        else if (transform.position.y < 0.5f)
-        {
-            //I'm below the surface, so push me up           
-            transform.position.Set(transform.position.x, 0.5f, transform.position.z);
-        }
+        
  
     }
     private void LateUpdate()
     {
       
     }
+
     void handleInput()
     {
         
@@ -100,7 +94,7 @@ public class playerMotion : MonoBehaviour {
     void handleMovement()
     {
         //initial force of gravity
-        totalForce.Set(0, 0.0f , 0);
+        totalForce.Set(0, 1.0f , 0);
         totalForce *= GRAVITY_CONSTANT;
 
         //add our ship moveForce
@@ -116,12 +110,13 @@ public class playerMotion : MonoBehaviour {
         //move the player
         transform.position += velocity * Time.deltaTime;
 
+        //decay velocity
         velocity *= friction;
         
 
     }
 
-    bool handleGround()
+    bool handleRegion()
     {
         //keep the player within bounds
         /*
@@ -164,6 +159,7 @@ public class playerMotion : MonoBehaviour {
 
 
     }
+
     void handleFacing()
     {
 
@@ -172,7 +168,8 @@ public class playerMotion : MonoBehaviour {
         pointAt(transform.position + face * 2.0f);
         
     }
-    public void pointAt(Vector3 target)
+
+    void pointAt(Vector3 target)
     {
         Quaternion a = transform.rotation;          //save it
         transform.LookAt(target);                   //look at target
@@ -186,5 +183,23 @@ public class playerMotion : MonoBehaviour {
         transform.rotation = c;
 
     }
+
+    void handleTerrain()
+    {
+        if (transform.position.y > 0.5f)
+        {
+
+            //I'm in the air - state ?
+        }
+        else if (transform.position.y < 0.5f)
+        {
+            //I'm below the surface, so push me up 
+            Vector3 pos = new Vector3(transform.position.x, 0.5f, transform.position.z);
+            transform.position = pos;
+            
+        }
+
+    }
+
 
 }
