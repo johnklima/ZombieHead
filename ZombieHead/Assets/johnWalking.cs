@@ -6,7 +6,8 @@ public abstract class AnimationScript : MonoBehaviour
 {
 
 }
-public class johnWalking : AnimationScript
+
+public class JohnWalking : AnimationScript
 {
 
     // Use this for initialization

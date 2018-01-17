@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class johnHips : MonoBehaviour {
+public class JohnIdle : AnimationScript
+{
 
 	// Use this for initialization
 	void Start () {

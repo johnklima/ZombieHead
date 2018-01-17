@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playerMotion : MonoBehaviour {
+public class PlayerMotion : MonoBehaviour {
 
     //gravity in meters per second per second
     static float GRAVITY_CONSTANT = -9.8f;                      // -- for earth,  -1.6 for moon 
@@ -13,6 +13,7 @@ public class playerMotion : MonoBehaviour {
     public Vector3 totalForce = new Vector3(0, 0, 0);   //total of ALL forces applied
 
     public AnimationScript walk;
+    public AnimationScript idle;
 
     //player characteristics
     public float mass = 1.0f;
@@ -22,6 +23,7 @@ public class playerMotion : MonoBehaviour {
     public float consumption = 0.0f;                     //energy burn rate
     public float friction = 0.975f;                      //TODO: put into world property
     public float lookRate = 3.0f;                        //interpolation rate for looking
+    public float groundOffset = 1.0f;                    //how high off ground (terrain)
 
     // Use this for initialization
     void Start () {
@@ -54,11 +56,13 @@ public class playerMotion : MonoBehaviour {
         //clear out the move force each frame
         moveForce.Set(0, 0, 0);       
 
-        //vertical thrust
-        if (Input.GetKey(KeyCode.Space) && energy > 0.0f)
+        
+        if (Input.GetKeyDown(KeyCode.Space) && energy > 0.0f)
         {
-            moveForce.y = verticalForce;
-            energy -= consumption * Time.deltaTime;            
+
+            //JUMPING
+            
+            energy -= consumption ;            
 
         }
 
@@ -94,7 +98,7 @@ public class playerMotion : MonoBehaviour {
     void handleMovement()
     {
         //initial force of gravity
-        totalForce.Set(0, 1.0f , 0);
+        totalForce.Set(0, 0.0f , 0);
         totalForce *= GRAVITY_CONSTANT;
 
         //add our ship moveForce
@@ -186,15 +190,15 @@ public class playerMotion : MonoBehaviour {
 
     void handleTerrain()
     {
-        if (transform.position.y > 0.5f)
+        if (transform.position.y > groundOffset)
         {
-
+            //jumping or falling
             //I'm in the air - state ?
         }
-        else if (transform.position.y < 0.5f)
+        else if (transform.position.y < groundOffset)
         {
             //I'm below the surface, so push me up 
-            Vector3 pos = new Vector3(transform.position.x, 0.5f, transform.position.z);
+            Vector3 pos = new Vector3(transform.position.x, groundOffset, transform.position.z);
             transform.position = pos;
             
         }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class followPlayer : MonoBehaviour {
+public class FollowPlayer : MonoBehaviour {
 
     public Transform target;
     public Transform CameraTargets;                     //list of world positions for camera distance

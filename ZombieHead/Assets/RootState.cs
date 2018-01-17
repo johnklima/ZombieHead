@@ -7,13 +7,13 @@ public class RootState : MonoBehaviour {
 
     protected List<StateNode> m_childStates ;
 
-    public playerMotion playermotion; 
+    public PlayerMotion playermotion; 
 
 
     // Use this for initialization prior to anything else happening
     void Awake () {
 
-        playermotion = transform.GetComponent<playerMotion>();
+        playermotion = transform.GetComponent<PlayerMotion>();
 
         m_childStates = new List<StateNode>();
 
