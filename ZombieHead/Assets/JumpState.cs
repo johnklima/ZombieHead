@@ -7,6 +7,11 @@ using UnityEngine;
 public class  JumpState: StateNode
 {
 
+    enum StateProgessStates { Start, InAir, Land};
+    int stateProgress = 0;
+    float jumptimer = 0;
+    float durationOfJump = 2.0f;
+
     //constructor
     public JumpState(RootState root)
     {
@@ -31,14 +36,47 @@ public class  JumpState: StateNode
             return true;
         }
 
-        //lets just say I am true, which in fact I always am if none of my children are true
-        //as IDLE is the first state under root
-        p_isInState = true;
+        if (Input.GetKeyDown(KeyCode.Space) && rootState.playermotion.energy > 0.0f)
+        {
+
+            rootState.playermotion.isJumping = true;
+            rootState.playermotion.energy -= 0.0f; // subtract none for now
+            p_isInState = true;
+            stateProgress = (int) StateProgessStates.Start;
+            Debug.Log("Jump init");
+
+        }
+
         if (p_isInState)
         {
-            //do something
-            Debug.Log("IN JUMP");
-            rootState.playermotion.jump.enabled = true;
+
+            if (stateProgress == (int)StateProgessStates.Start)
+            {
+                //initialize jump
+                jumptimer = Time.time;
+                stateProgress = (int)StateProgessStates.InAir;
+                rootState.playermotion.jump.enabled = true;
+                Debug.Log("Jump Start");
+            }
+            else if (stateProgress == (int)StateProgessStates.InAir)
+            {
+                //handle motion and animation in air
+                Debug.Log("In Air");
+
+                if (Time.time - jumptimer > durationOfJump)
+                {
+                    stateProgress = (int)StateProgessStates.Land;
+                }
+            }
+            else if (stateProgress == (int)StateProgessStates.Land)
+            {
+                //return to the ground
+                Debug.Log("Land");
+                rootState.playermotion.jump.enabled = false;
+                p_isInState = false;
+            }
+
+           
         }
 
         return p_isInState;

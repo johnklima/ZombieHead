@@ -24,7 +24,10 @@ public class RootState : MonoBehaviour {
         WalkState walkstate = new WalkState(this);
         idlestate.addChildState(walkstate);
 
-        
+        JumpState jumpstate = new JumpState(this);
+        walkstate.addChildState(jumpstate);
+
+
     }
 
     void Start()

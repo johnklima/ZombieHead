@@ -30,10 +30,7 @@ public class WalkState : StateNode {
             //since a child state is true, return this fact!
             return true;
         }
-
-        //Am I walking???
-        p_isInState = false;
-
+        
         //get the velocity
         Vector3 velo = rootState.playermotion.velocity;
 
@@ -42,6 +39,8 @@ public class WalkState : StateNode {
 
         if (velo.magnitude > 0.5f)
             p_isInState = true;
+        else
+            p_isInState = false;
 
 
         if (p_isInState)
@@ -57,6 +56,7 @@ public class WalkState : StateNode {
             rootState.playermotion.walk.enabled = false;
 
         }
+
         return p_isInState;
     }
 

@@ -11,7 +11,7 @@ public class PlayerMotion : MonoBehaviour {
 
     public Vector3 moveForce = new Vector3(0, 0, 0);    //combined force of all axis from input for move
     public Vector3 totalForce = new Vector3(0, 0, 0);   //total of ALL forces applied
-
+    
     public AnimationScript walk;
     public AnimationScript idle;
     public AnimationScript jump;
@@ -25,6 +25,9 @@ public class PlayerMotion : MonoBehaviour {
     public float friction = 0.975f;                      //TODO: put into world property
     public float lookRate = 3.0f;                        //interpolation rate for looking
     public float groundOffset = 1.0f;                    //how high off ground (terrain)
+
+    public bool isJumping = false;
+
 
     // Use this for initialization
     void Start () {
@@ -56,16 +59,6 @@ public class PlayerMotion : MonoBehaviour {
         
         //clear out the move force each frame
         moveForce.Set(0, 0, 0);       
-
-        
-        if (Input.GetKeyDown(KeyCode.Space) && energy > 0.0f)
-        {
-
-            //JUMPING
-            
-            energy -= consumption ;            
-
-        }
 
         if (Input.GetKey(KeyCode.A) && energy > 0.0f)
         {
@@ -104,7 +97,8 @@ public class PlayerMotion : MonoBehaviour {
 
         //add our ship moveForce
         totalForce += moveForce;
-
+        
+        
         //maybe some wind?
         //forces += wind * Mathf.Sin(Time.time);
         //Debug.Log (Mathf.Sin (Time.time));
@@ -191,12 +185,9 @@ public class PlayerMotion : MonoBehaviour {
 
     void handleTerrain()
     {
-        if (transform.position.y > groundOffset)
-        {
-            //jumping or falling
-            //I'm in the air - state ?
-        }
-        else if (transform.position.y < groundOffset)
+
+
+        if (transform.position.y < groundOffset)
         {
             //I'm below the surface, so push me up 
             Vector3 pos = new Vector3(transform.position.x, groundOffset, transform.position.z);

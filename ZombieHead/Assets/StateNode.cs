@@ -27,6 +27,7 @@ public abstract class StateNode {
     {
         foreach (var child in m_childStates)
         {
+            
             if (child.advanceTime(dt) == true)
             {
                 //if any child is true, stop iterating and exit                
