@@ -93,8 +93,11 @@ public class  JumpState: StateNode
                 // set y position absolute
                 jumpVector.Set(jumpVector.x, rootState.playermotion.groundOffset + s, jumpVector.z);
 
-                //set player position accordingly
+                //set player position accordingly - this is absolute position
                 rootState.playermotion.gameObject.transform.position = jumpVector;
+
+                //ignore physics velocity when in jump - for now just kill it
+                rootState.playermotion.velocity *= 0;
 
                 if (Time.time - jumptimer > durationOfJump)
                 {

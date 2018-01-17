@@ -5,6 +5,9 @@ using UnityEngine;
 public class JohnIdle : AnimationScript
 {
 
+    //we need to accumulate time so when the anim is disabled. it continues from where it left off
+    //TODO: ultimately we want to transition between states and animations
+    private float accumTime = 0;
 	// Use this for initialization
 	void Start () {
 		
@@ -14,9 +17,9 @@ public class JohnIdle : AnimationScript
 	void Update () {
 
         //move the hips ball back and forth
-        float t = Time.time;
+        accumTime += Time.deltaTime;
         
-        float y = Mathf.Sin(t * 4.0f) * 0.5f;
+        float y = Mathf.Sin(accumTime * 4.0f) * 0.5f;
 
         transform.localPosition = new Vector3(transform.localPosition.x, y, transform.localPosition.z);
 
