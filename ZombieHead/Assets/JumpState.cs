@@ -7,10 +7,11 @@ using UnityEngine;
 public class  JumpState: StateNode
 {
 
-    enum StateProgessStates { Start, InAir, Land};
-    int stateProgress = 0;
-    float jumptimer = 0;
-    float durationOfJump = 2.0f;
+    private enum StateProgessStates { Start, InAir, Land};
+    private int stateProgress = 0;
+    private float jumptimer = 0;
+    private float durationOfJump = 2.0f;
+    private Vector3 jumpVector = new Vector3(0, 0, 0);
 
     //constructor
     public JumpState(RootState root)
@@ -36,13 +37,18 @@ public class  JumpState: StateNode
             return true;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && rootState.playermotion.energy > 0.0f)
+        if ( Input.GetKeyDown(KeyCode.Space)        && 
+             rootState.playermotion.energy > 0.0f   && 
+             !p_isInState)
         {
 
             rootState.playermotion.isJumping = true;
             rootState.playermotion.energy -= 0.0f; // subtract none for now
             p_isInState = true;
             stateProgress = (int) StateProgessStates.Start;
+
+            jumpVector *= 0;            //ensure jump vector starts at zero
+
             Debug.Log("Jump init");
 
         }
@@ -62,6 +68,33 @@ public class  JumpState: StateNode
             {
                 //handle motion and animation in air
                 Debug.Log("In Air");
+
+                /* 
+                 * we can simply use sin of time/duration to arrive at an x,y,z and mult by some amplitude (height)
+                 * and some frequency (distance)
+                 * first we must scale PI (an angle) by our current time increment. basically we want to
+                 * count from 0 to PI over time, to pass to Sine
+                */
+                float f = Mathf.PI  * ((Time.time - jumptimer) / durationOfJump);
+                float s = Mathf.Sin(f) * 4; //amplitude is height
+
+                //next get the player forward vector
+                Vector3 fwd = rootState.playermotion.gameObject.transform.forward;
+
+                //mult x,z by time passed as a function of delta time
+                fwd *= dt * 6.0f;//frequency is distance
+                
+                // replace Y with 0
+                fwd.Set(fwd.x, 0, fwd.z);
+                
+                // add forward motion to current position
+                jumpVector = rootState.playermotion.gameObject.transform.position + fwd;
+                
+                // set y position absolute
+                jumpVector.Set(jumpVector.x, rootState.playermotion.groundOffset + s, jumpVector.z);
+
+                //set player position accordingly
+                rootState.playermotion.gameObject.transform.position = jumpVector;
 
                 if (Time.time - jumptimer > durationOfJump)
                 {
