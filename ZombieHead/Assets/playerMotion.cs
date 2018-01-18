@@ -17,6 +17,9 @@ public class PlayerMotion : MonoBehaviour {
     public AnimationScript idle;
     public AnimationScript jump;
 
+    //world stuff
+    public TerrainMesh terrainMesh;
+
     //player characteristics
     public float mass = 1.0f;
     public float energy = 1.0f;
@@ -129,30 +132,30 @@ public class PlayerMotion : MonoBehaviour {
 
         bool ret = false;
 
-        if (transform.position.x > 8)
+        if (transform.position.x > 30)
         {
-            Vector3 pos = new Vector3(7.5f, transform.position.y, transform.position.z);
+            Vector3 pos = new Vector3(29.5f, transform.position.y, transform.position.z);
             transform.position = pos;
             velocity *= 0;
             ret = true;
         }
-        if (transform.position.x < -14)
+        if (transform.position.x < 10)
         {
-            Vector3 pos = new Vector3(-13.5f, transform.position.y, transform.position.z);
+            Vector3 pos = new Vector3(10.5f, transform.position.y, transform.position.z);
             transform.position = pos;
             velocity *= 0;
             ret = true;
         }
-        if (transform.position.z > 49)
+        if (transform.position.z > 99)
         {
-            Vector3 pos = new Vector3(transform.position.x, transform.position.y, 48.5f);
+            Vector3 pos = new Vector3(transform.position.x, transform.position.y, 98.5f);
             transform.position = pos;
             velocity *= 0;
             ret = true;
         }
-        if (transform.position.z < -49)
+        if (transform.position.z < 1)
         {
-            Vector3 pos = new Vector3(transform.position.x, transform.position.y, -48.5f);
+            Vector3 pos = new Vector3(transform.position.x, transform.position.y, 1.5f);
             transform.position = pos;
             velocity *= 0;
             ret = true;
@@ -191,10 +194,16 @@ public class PlayerMotion : MonoBehaviour {
     {
 
         //TODO: follow the level terrain with raycast or height map (depends on art assets)
-        if (transform.position.y < groundOffset)
+        //lets just do it with the procedural terrain for now
+        float h = terrainMesh.getHeightAt(transform.position);
+        Debug.Log("height " + h);
+
+        //TODO: this should also be part of the state machine DAG
+        if (!isJumping)
         {
             //I'm below the surface, so push me up 
-            Vector3 pos = new Vector3(transform.position.x, groundOffset, transform.position.z);
+            Vector3 pos = new Vector3(transform.position.x, groundOffset + h, transform.position.z);
+            pos = Vector3.Slerp(transform.position, pos, Time.deltaTime * lookRate * 3);
             transform.position = pos;
             
         }

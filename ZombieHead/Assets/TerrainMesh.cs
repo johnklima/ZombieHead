@@ -101,18 +101,19 @@ public class TerrainMesh : MonoBehaviour {
         PerlinNoisePlane pnp = new PerlinNoisePlane();
         pnp.scale = 1.5f;
         pnp.power = 1.5f;
-        pnp.MakeSomeNoise(mesh);
+
+        //pnp.MakeSomeNoise(mesh);
 
         
-        //put a bump on it
-        for (int i = 0; i < levelDifficulty * 2; i++)
+        //put  bumps on it
+        for (int i = 0; i < 10; i++)
         {
 
-            int xp = Random.Range(0, xSize - 20);
-            int zp = Random.Range(0, zSize - 20);
+            int xp = Random.Range(20, xSize - 20);
+            int zp = Random.Range(20, zSize - 20);
 
             Vector3 bumpPos = new Vector3(xp, 0, zp);
-            makeBump(10, 0.1f*levelDifficulty, bumpPos);
+            makeBump(9, 0.3f, bumpPos);
         }
 
 
@@ -130,29 +131,31 @@ public class TerrainMesh : MonoBehaviour {
     {
 
         Vector3[] vertices = mesh.vertices;
+        bool[] touched = new bool[vertices.Length];
 
-        float r = radius; //LD
-        r = Random.Range(5.0f, 10.0f);
+        float r = radius; 
+        //r = Random.Range(3.0f, 9.0f);
 
         //make sure we have enough vertices in our terrain to make bumps of this size!!!
         Vector3 center = pos;
-        for (float phi = 0.0f; phi < 2 * Mathf.PI; phi += Mathf.PI / 100.0f) // Azimuth [0, 2PI]
+        for (float phi = 0.0f; phi < 2 * Mathf.PI; phi += Mathf.PI / 1000.0f) // Azimuth [0, 2PI]
         {
-            for (float theta = 0.0f; theta < Mathf.PI; theta += Mathf.PI / 100.0f) // Elevation [0, PI]
+            for (float theta = 0.0f; theta < Mathf.PI; theta += Mathf.PI / 1000.0f) // Elevation [0, PI]
             {
 
                 int x = Mathf.RoundToInt(r * Mathf.Cos(phi) * Mathf.Sin(theta) + center.x);
-                float y = Mathf.Abs(r * Mathf.Sin(phi) * Mathf.Sin(theta) + center.y) * height;  //LD
+                float y = Mathf.Abs(r * Mathf.Sin(phi) * Mathf.Sin(theta) + center.y) * height ; 
                 int z = Mathf.RoundToInt(r * Mathf.Cos(theta) + center.z);
 
                 //give it some detail - we could use perlin here too dont let i be too large
                 int i = getVertexIndexFromXZ(x, z);
 
-                if (i < vertices.Length)
+                if (i < vertices.Length && touched[i] == false)
                 {
                     Vector3 vert = vertices[i];
-                    vert.Set(x, y + Random.Range(-1, 1) * 0.3f, z);
+                    vert.Set(x, y , z);   //+ Random.Range(-1, 1) * 0.3f
                     vertices[i] = vert;
+                    touched[i] = true;
                 }
             }
         }
@@ -168,20 +171,34 @@ public class TerrainMesh : MonoBehaviour {
     public float getHeightAt(Vector3 pos)
     {
         if (mesh == null)
+        {
+            Debug.Log("mesh null");
             return 1;
+        }
         if (mesh.vertices == null)
+        {
+            Debug.Log("verts null");
             return 1;
+        }
         if (mesh.vertexCount < 1)
+        {
+            Debug.Log("no verts");
             return 1;
+        }
 
         //get the one vertex closest to our rounded integer position
+        //we need to subtract the terrain transform so we are in positive space
         float h = 0;
-        int ix = Mathf.RoundToInt(pos.x);
-        int iz = Mathf.RoundToInt(pos.z);
+        int ix = Mathf.RoundToInt(pos.x - transform.position.x);
+        int iz = Mathf.RoundToInt(pos.z - -transform.position.z);
         int v1 = iz * (xSize + 1) + ix; //that extra vert is anoying...
 
         if (v1 > xSize * zSize || v1 < 0)
+        {
+            Debug.Log("ret " + v1 + " > " + xSize + " * " + zSize + " || " + v1 + " < 0");
             return 1;
+
+        }
 
         //this is the "simple" height
         h = mesh.vertices[ v1 ].y + 0.3f; //give him a lift, make it a param?
@@ -351,10 +368,7 @@ public class TerrainMesh : MonoBehaviour {
 
     public void animateSurface(float dt)
     {
-
-
-
-
+        
         Vector2[] uvs = mesh.uv;
 
 
