@@ -32,6 +32,7 @@ public class  JumpState: StateNode
             p_isInState = false;
 
             rootState.playermotion.jump.enabled = false;
+            rootState.playermotion.isJumping = false;
 
             //since a child state is true, return this fact!
             return true;
@@ -109,6 +110,7 @@ public class  JumpState: StateNode
                 //return to the ground
                 Debug.Log("Land");
                 rootState.playermotion.jump.enabled = false;
+                rootState.playermotion.isJumping = false;
                 p_isInState = false;
             }
 
