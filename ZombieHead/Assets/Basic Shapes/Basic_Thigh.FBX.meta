@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 22143c4b9a2f05546b1f75920667a391
-timeCreated: 1516645212
+guid: 3bd0bd53c978e834f98e311fa17c0273
+timeCreated: 1516646997
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -10,8 +10,7 @@ ModelImporter:
     2100000: wire_028028177
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Box003
-    7400000: Take 001
+    4300000: Object003
     9500000: //RootNode
   externalObjects: {}
   materials:

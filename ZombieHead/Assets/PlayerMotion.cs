@@ -81,7 +81,7 @@ public class PlayerMotion : MonoBehaviour {
 
         }
 
-        /*
+        
         if (Input.GetKey(KeyCode.W) && energy > 0.0f)
         {
             moveForce.x = -lateralForce;
@@ -95,7 +95,7 @@ public class PlayerMotion : MonoBehaviour {
             energy -= consumption * Time.deltaTime;
 
         }
-        */
+        
     }
 
     void handleMovement()
