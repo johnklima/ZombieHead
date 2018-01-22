@@ -127,10 +127,7 @@ public class PlayerMotion : MonoBehaviour {
     bool isOutOfBounds()
     {
         //keep the player within bounds
-        /*
-            z = -50, 50
-            x = -15, 15
-        */
+   
 
         bool ret = false;
 
