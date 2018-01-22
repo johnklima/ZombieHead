@@ -1850,7 +1850,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMotion: {fileID: 1792661807}
-  rollFactor: 10000
+  rollFactor: 100
 --- !u!1 &1418051828
 GameObject:
   m_ObjectHideFlags: 0
