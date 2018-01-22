@@ -66,11 +66,7 @@ public class Segment3d : MonoBehaviour
         Quaternion b = transform.rotation;          //get new rotation
         transform.rotation = a;                     //set it back
 
-        //we need to "clamp" the quat so it only rotates on a 2d plane
-        //sort of "poor man's" joint constraint
-        Vector3 euler = b.eulerAngles;
-        euler.Set(euler.x, 0, euler.y);
-        //b = Quaternion.Euler(euler);
+      
         
         //if the system is in drag mode, we want to crank the interpolation
         //otherwise, the chain is "lazy," it doesnt need to do anything
@@ -82,7 +78,7 @@ public class Segment3d : MonoBehaviour
         float t = Time.deltaTime;                   
         Quaternion c = Quaternion.Slerp(a, b, t * ir);
 
-        transform.rotation = b;// c;
+        transform.rotation = b;// c;   //ignore interpolation, unpredictable results
         
     }
 
