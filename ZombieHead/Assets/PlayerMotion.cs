@@ -17,8 +17,7 @@ public class PlayerMotion : MonoBehaviour {
     public AnimationScript idle;
     public AnimationScript jump;
 
-    //world stuff
-    public TerrainMesh terrainMesh;
+    static int GROUND_LAYER = 1 << 8;
 
     //player characteristics
     public float mass = 1.0f;
@@ -73,7 +72,7 @@ public class PlayerMotion : MonoBehaviour {
             energy -= consumption * Time.deltaTime;
 
         }
-
+        
         if (Input.GetKey(KeyCode.D) && energy > 0.0f)
         {
             moveForce.z = lateralForce;
@@ -81,6 +80,7 @@ public class PlayerMotion : MonoBehaviour {
 
         }
 
+        /*
         if (Input.GetKey(KeyCode.W) && energy > 0.0f)
         {
             moveForce.x = -lateralForce;
@@ -94,6 +94,7 @@ public class PlayerMotion : MonoBehaviour {
             energy -= consumption * Time.deltaTime;
 
         }
+        */
     }
 
     void handleMovement()
@@ -193,22 +194,39 @@ public class PlayerMotion : MonoBehaviour {
     void handleTerrain()
     {
 
-        //TODO: follow the level terrain with raycast or height map (depends on art assets)
-        //lets just do it with the procedural terrain for now
-        float h = terrainMesh.getHeightAt(transform.position);
-        Debug.Log("height " + h);
+
+        //we want to raycast
+        float h = 1;
+        RaycastHit hit;
+        int layerMask = GROUND_LAYER;
+
+        Vector3 raycastPoint = transform.position;
+        raycastPoint += new Vector3(0, 1, 0);
+
+        if (Physics.Raycast(raycastPoint, -Vector3.up, out hit, 100, layerMask))
+        {
+
+            h = hit.point.y ;
+            
+        }
+
+        
 
         //TODO: this should also be part of the state machine DAG
-        if (!isJumping)
+        if (!isJumping )
         {
             //I'm below the surface, so push me up 
-            Vector3 pos = new Vector3(transform.position.x, groundOffset + h, transform.position.z);
-            pos = Vector3.Slerp(transform.position, pos, Time.deltaTime * lookRate * 3);
+            Vector3 pos = new Vector3(transform.position.x,  h + groundOffset, transform.position.z);
+            pos = Vector3.Lerp(transform.position, pos, Time.deltaTime * lookRate * 3);
             transform.position = pos;
             
         }
 
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        //Debug.Log(other.name);
+    }
 
 }
