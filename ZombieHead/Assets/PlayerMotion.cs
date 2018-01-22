@@ -127,6 +127,15 @@ public class PlayerMotion : MonoBehaviour {
     bool isOutOfBounds()
     {
         //keep the player within bounds
+
+        /*
+         * here we are using absolute world coordinates, bad.'
+         * two ways to do this, way one, get the x,z bounds of the terrain
+         * way two, if we don't intersect said terrain for the terrain follow code
+         * we are out of bounds, but we still need to limit x axis motion for
+         * camera reasons
+         * 
+         */
    
 
         bool ret = false;
