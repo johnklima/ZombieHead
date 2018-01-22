@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FollowPlayer : MonoBehaviour {
 
-    public Transform target;
+    public Transform player;
     public Transform CameraTargets;                     //list of world positions for camera distance
     public float lookRate = 3.0f;
 
@@ -21,7 +21,7 @@ public class FollowPlayer : MonoBehaviour {
         Vector3 camtarget = findNearestCameraTarget();
 
         //force the camera to follow the ship
-        float z = target.position.z;
+        float z = player.position.z;
         float x = camtarget.x;
         float y = camtarget.y;
 
@@ -31,7 +31,7 @@ public class FollowPlayer : MonoBehaviour {
         campos = Vector3.Slerp(transform.position, campos, t * lookRate);
         campos.Set(campos.x, campos.y, z);
         transform.position = campos;
-        pointAt(target.position);
+        pointAt(player.position);
 
     }
     public void pointAt(Vector3 target)
