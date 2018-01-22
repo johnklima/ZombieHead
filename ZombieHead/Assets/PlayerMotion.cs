@@ -28,10 +28,9 @@ public class PlayerMotion : MonoBehaviour {
     public float friction = 0.975f;                      //TODO: put into world property
     public float lookRate = 3.0f;                        //interpolation rate for looking
     public float groundOffset = 1.0f;                    //how high off ground (terrain)
-    public float groundRate = 1.0f;
 
     public bool isJumping = false;
-    public float terrainHeight = 0;
+
 
     // Use this for initialization
     void Start () {
@@ -211,22 +210,14 @@ public class PlayerMotion : MonoBehaviour {
             
         }
 
-        terrainHeight = h + groundOffset;
+        
 
-        //ensure I am NEVER below the surface
-        if (transform.position.y < terrainHeight)
-        {
-            Vector3 pos = new Vector3(transform.position.x, terrainHeight, transform.position.z);
-            transform.position = pos;
-        }
-
-
-        //TODO: this should also be part of the state machine DAG???
+        //TODO: this should also be part of the state machine DAG
         if (!isJumping )
         {
             //I'm below the surface, so push me up 
-            Vector3 pos = new Vector3(transform.position.x,  terrainHeight, transform.position.z);
-            pos = Vector3.Lerp(transform.position, pos, Time.deltaTime * groundRate);
+            Vector3 pos = new Vector3(transform.position.x,  h + groundOffset, transform.position.z);
+            pos = Vector3.Lerp(transform.position, pos, Time.deltaTime * lookRate * 3);
             transform.position = pos;
             
         }

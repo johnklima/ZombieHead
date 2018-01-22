@@ -10,12 +10,7 @@ public class  JumpState: StateNode
     private enum StateProgessStates { Start, InAir, Land};
     private int stateProgress = 0;
     private float jumptimer = 0;
-    private float initialY = 0;
-    public  float durationOfJump = 2.0f;
-    public float jumpHeight = 4.0f;
-    public float jumpDistance = 6.0f;
-    
-
+    private float durationOfJump = 2.0f;
     private Vector3 jumpVector = new Vector3(0, 0, 0);
 
     //constructor
@@ -54,7 +49,6 @@ public class  JumpState: StateNode
             stateProgress = (int) StateProgessStates.Start;
 
             jumpVector *= 0;            //ensure jump vector starts at zero
-            initialY = rootState.playermotion.gameObject.transform.position.y;
 
             Debug.Log("Jump init");
 
@@ -83,26 +77,22 @@ public class  JumpState: StateNode
                  * count from 0 to PI over time, to pass to Sine
                 */
                 float f = Mathf.PI  * ((Time.time - jumptimer) / durationOfJump);
-                float h = Mathf.Sin(f) * jumpHeight; //amplitude is height
+                float s = Mathf.Sin(f) * 4; //amplitude is height
 
                 //next get the player forward vector
                 Vector3 fwd = rootState.playermotion.gameObject.transform.forward;
 
                 //mult x,z by time passed as a function of delta time
-                fwd *= dt * jumpDistance;//frequency is distance
+                fwd *= dt * 6.0f;//frequency is distance
                 
                 // replace Y with 0
                 fwd.Set(fwd.x, 0, fwd.z);
                 
                 // add forward motion to current position
                 jumpVector = rootState.playermotion.gameObject.transform.position + fwd;
-
-                float finalH =  initialY + 
-                                h + 
-                                rootState.playermotion.groundOffset;
-
+                
                 // set y position absolute
-                jumpVector.Set(jumpVector.x,  finalH , jumpVector.z);
+                jumpVector.Set(jumpVector.x, rootState.playermotion.groundOffset + s, jumpVector.z);
 
                 //set player position accordingly - this is absolute position
                 rootState.playermotion.gameObject.transform.position = jumpVector;
@@ -111,11 +101,6 @@ public class  JumpState: StateNode
                 rootState.playermotion.velocity *= 0;
 
                 if (Time.time - jumptimer > durationOfJump)
-                {
-                    stateProgress = (int)StateProgessStates.Land;
-                }
-
-                if (rootState.playermotion.gameObject.transform.position.y < rootState.playermotion.terrainHeight)
                 {
                     stateProgress = (int)StateProgessStates.Land;
                 }
