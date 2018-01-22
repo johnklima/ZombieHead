@@ -42,7 +42,7 @@ public class WalkState : StateNode {
         else
             p_isInState = false;
 
-
+        p_isInState = true;
         if (p_isInState)
         {
             //do something
