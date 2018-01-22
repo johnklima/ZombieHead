@@ -42,6 +42,7 @@ public class WalkState : StateNode {
         else
             p_isInState = false;
 
+        //force into state for animation testing
         p_isInState = true;
         if (p_isInState)
         {
