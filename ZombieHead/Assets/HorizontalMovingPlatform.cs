@@ -2,14 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HorizontalMovingPlatform : MonoBehaviour {
+public class MovingPlatform : MonoBehaviour
+{
+    public float zMove = 0;
+    public float xMove = 0;
+
+}
+public class HorizontalMovingPlatform : MovingPlatform
+{
 
 
     public Vector3 StartPosition;
     public float maximumDisplacement = 39.0f;
     public Vector3 curDisplacement = new Vector3(0, 0, 0);
-    public float zMove = 0;
-
+    
 	// Use this for initialization
 	void Awake () {
 

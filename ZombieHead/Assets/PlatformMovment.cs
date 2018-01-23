@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlatformMovment : MonoBehaviour
+public class PlatformMovment : MovingPlatform
 {
     private Vector3 posA;
 
@@ -29,7 +29,8 @@ public class PlatformMovment : MonoBehaviour
 	// Update is called once per frame
 	void Update () {
 
-        Move();
+         
+       Move();
 	}
 
     private void Move()

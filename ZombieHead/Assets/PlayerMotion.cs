@@ -222,7 +222,9 @@ public class PlayerMotion : MonoBehaviour {
 
             if (hit.transform.tag == "MovingPlatform")
             {
-                zmove = hit.transform.GetComponent<HorizontalMovingPlatform>().zMove;
+
+                Debug.Log("On Moving Platform");
+                zmove = hit.transform.GetComponent<MovingPlatform>().zMove;
                 isOnPlatform = true;
                 Vector3 pos = new Vector3(transform.position.x, transform.position.y, transform.position.z + zmove);
                 transform.position = pos; 
@@ -243,7 +245,7 @@ public class PlayerMotion : MonoBehaviour {
         {
             Vector3 pos = new Vector3(transform.position.x, terrainHeight, transform.position.z);
             transform.position = pos;
-            velocity.Scale( gravityNull);
+            velocity.Scale( gravityNull );
 
         }
 
