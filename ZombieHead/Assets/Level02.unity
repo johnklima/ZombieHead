@@ -38,12 +38,12 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -86,7 +86,8 @@ LightmapSettings:
     m_PVRFilteringAtrousColorSigma: 1
     m_PVRFilteringAtrousNormalSigma: 1
     m_PVRFilteringAtrousPositionSigma: 1
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000002, guid: 217a1b37f4ba1a240a5696a8ba05985d,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -4569,9 +4570,12 @@ MonoBehaviour:
   groundOffset: 1
   groundRate: 1
   isJumping: 0
+  isOnPlatform: 0
+  zmove: 0
   terrainHeight: 0
   onSurface: 1
   lastGoodPosition: {x: 0, y: 0, z: 0}
+  accel: 1
 --- !u!114 &1792661808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4943,6 +4947,7 @@ MonoBehaviour:
   StartPosition: {x: 0, y: 0, z: 0}
   maximumDisplacement: 39
   curDisplacement: {x: 0, y: 0, z: 0}
+  zMove: 0
 --- !u!1 &1945087828 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100068, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
