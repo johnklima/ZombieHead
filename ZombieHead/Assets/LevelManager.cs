@@ -24,8 +24,7 @@ public class LevelManager : MonoBehaviour {
         // Pressing "Backspace" will reload current level if current level is not the Main Menu.
         if (Input.GetKey(KeyCode.Backspace) && SceneManager.GetActiveScene().name != "MainMenu")
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            Debug.Log("Replaying " + SceneManager.GetActiveScene().name);
+            RestartCurrentLevel();
         }
 
         // Pressing "0" will load the Main Menu.
@@ -55,5 +54,11 @@ public class LevelManager : MonoBehaviour {
             SceneManager.LoadScene("Level03");
             Debug.Log("Level03 loaded.");
         }
+    }
+
+    public void RestartCurrentLevel ()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Debug.Log("Replaying " + SceneManager.GetActiveScene().name);
     }
 }

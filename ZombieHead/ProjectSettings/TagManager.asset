@@ -6,6 +6,7 @@ TagManager:
   tags:
   - MovingPlatform
   - pendulumPlatform
+  - Spikes
   layers:
   - Default
   - TransparentFX

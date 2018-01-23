@@ -1130,6 +1130,12 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 504225831}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &505739290 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114672774892177856, guid: d8cc272b0d2bc8043a53a49eb5b350ce,
+    type: 2}
+  m_PrefabInternal: {fileID: 1698735839}
+  m_Script: {fileID: 11500000, guid: 3bc0a97a9ae885b408067d8e7e400d9d, type: 3}
 --- !u!1 &506341168 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100092, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
@@ -4519,6 +4525,7 @@ GameObject:
   - component: {fileID: 1792661808}
   - component: {fileID: 1792661809}
   - component: {fileID: 1792661810}
+  - component: {fileID: 1792661811}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -4611,6 +4618,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1792661811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1792661805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df4812a0899a88d498db2a36828a361d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 1792661805}
+  levelManager: {fileID: 505739290}
+  healthPoints: 100
 --- !u!1 &1793678011
 GameObject:
   m_ObjectHideFlags: 0
@@ -5154,6 +5175,202 @@ Prefab:
     - target: {fileID: 400168, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
       propertyPath: m_LocalPosition.z
       value: 19.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 100072, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100108, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100084, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100148, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100136, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100076, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100102, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100134, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100092, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100154, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100096, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100100, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100080, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100088, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100164, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100086, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100090, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100144, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100114, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100128, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100126, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100106, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100070, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100104, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100140, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100138, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100118, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100150, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100112, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100142, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100122, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100146, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100158, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100094, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100098, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100152, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100162, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100082, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100078, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100074, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100124, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100156, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100160, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100132, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100120, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100116, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100110, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100130, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 100068, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+      propertyPath: m_TagString
+      value: Spikes
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
