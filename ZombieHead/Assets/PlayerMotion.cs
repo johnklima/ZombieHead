@@ -11,6 +11,8 @@ public class PlayerMotion : MonoBehaviour {
 
     public Vector3 moveForce = new Vector3(0, 0, 0);            //combined force of all axis from input for move
     public Vector3 totalForce = new Vector3(0, 0, 0);           //total of ALL forces applied
+
+    private Vector3 gravityNull = new Vector3(1, 0, 1);
     
     //character animation scripts triggered by state machine
     public AnimationScript walk;
@@ -31,11 +33,13 @@ public class PlayerMotion : MonoBehaviour {
     public float groundRate = 1.0f;
 
     public bool isJumping = false;
+    public bool isOnPlatform = false;
+    public float zmove = 0;
     public float terrainHeight = 0;
 
     public bool onSurface = true;
     public Vector3 lastGoodPosition = new Vector3(0, 0, 0);
-
+    public float accel = 1;
     // Use this for initialization
     void Start () {
 		
@@ -108,7 +112,11 @@ public class PlayerMotion : MonoBehaviour {
     void handleMovement()
     {
         //initial force of gravity
-        totalForce.Set(0, 0.0f , 0);
+        if(isJumping)                           //we want absolute control of jump
+            totalForce.Set(0, 0.0f , 0);
+        else
+            totalForce.Set(0, 1.0f, 0);
+
         totalForce *= GRAVITY_CONSTANT;
 
         //add our ship moveForce
@@ -126,9 +134,10 @@ public class PlayerMotion : MonoBehaviour {
         transform.position += velocity * Time.deltaTime;
 
         //decay velocity
+        float y = velocity.y;
         velocity *= friction;
+        velocity.Set(velocity.x, y, velocity.z);
         
-
     }
 
     bool isOutOfBounds(bool isOnSurface)
@@ -190,6 +199,8 @@ public class PlayerMotion : MonoBehaviour {
 
     }
 
+
+    
     bool handleTerrain()
     {
 
@@ -202,10 +213,20 @@ public class PlayerMotion : MonoBehaviour {
         Vector3 raycastPoint = transform.position;
         raycastPoint += new Vector3(0, 1, 0);
 
+        isOnPlatform = false;
+
         if (Physics.Raycast(raycastPoint, -Vector3.up, out hit, 100, layerMask))
         {
 
             h = hit.point.y;
+
+            if (hit.transform.tag == "MovingPlatform")
+            {
+                zmove = hit.transform.GetComponent<HorizontalMovingPlatform>().zMove;
+                isOnPlatform = true;
+                Vector3 pos = new Vector3(transform.position.x, transform.position.y, transform.position.z + zmove);
+                transform.position = pos; 
+            }
             
         }
         else
@@ -218,23 +239,28 @@ public class PlayerMotion : MonoBehaviour {
         terrainHeight = h + groundOffset;
 
         //ensure I am NEVER below the surface
-        if (transform.position.y < terrainHeight)
+        if (transform.position.y <= terrainHeight)
         {
             Vector3 pos = new Vector3(transform.position.x, terrainHeight, transform.position.z);
             transform.position = pos;
+            velocity.Scale( gravityNull);
+
         }
 
 
         //TODO: this should also be part of the state machine DAG???
+        /*
         if (!isJumping )
         {
-            //I'm below the surface, so push me up 
+            accel += 0.1f;
+
+            //I'm above surface , gravity down to it;
             Vector3 pos = new Vector3(transform.position.x,  terrainHeight, transform.position.z);
-            pos = Vector3.Lerp(transform.position, pos, Time.deltaTime * groundRate);
+            pos = Vector3.Lerp(transform.position, pos, Time.deltaTime * groundRate );
             transform.position = pos;
             
         }
-
+        */
         return true;
 
     }
