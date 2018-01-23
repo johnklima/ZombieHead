@@ -22,8 +22,8 @@ public class FollowPlayer : MonoBehaviour {
 
         //force the camera to follow the ship
         float z = player.position.z;
-        float x = camtarget.x;
-        float y = camtarget.y;
+        float x = player.position.x  + 10  ;//camtarget.x;
+        float y = player.position.y  + 2 ; //camtarget.y;
 
         Vector3 campos = new Vector3(x, y, z);
 
@@ -31,6 +31,7 @@ public class FollowPlayer : MonoBehaviour {
         campos = Vector3.Slerp(transform.position, campos, t * lookRate);
         campos.Set(campos.x, campos.y, z);
         transform.position = campos;
+        
         pointAt(player.position);
 
     }

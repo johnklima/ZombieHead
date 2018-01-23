@@ -11,6 +11,8 @@ public class PlayerMotion : MonoBehaviour {
 
     public Vector3 moveForce = new Vector3(0, 0, 0);            //combined force of all axis from input for move
     public Vector3 totalForce = new Vector3(0, 0, 0);           //total of ALL forces applied
+
+    private Vector3 gravityNull = new Vector3(1, 0, 1);
     
     //character animation scripts triggered by state machine
     public AnimationScript walk;
@@ -31,8 +33,13 @@ public class PlayerMotion : MonoBehaviour {
     public float groundRate = 1.0f;
 
     public bool isJumping = false;
+    public bool isOnPlatform = false;
+    public float zmove = 0;
     public float terrainHeight = 0;
 
+    public bool onSurface = true;
+    public Vector3 lastGoodPosition = new Vector3(0, 0, 0);
+    public float accel = 1;
     // Use this for initialization
     void Start () {
 		
@@ -43,15 +50,18 @@ public class PlayerMotion : MonoBehaviour {
     {
         //make sure we are within the defined bounds of our level
         //isOutOfBounds returns True if we are out of bounds
-        if (isOutOfBounds() == false)
+        if (isOutOfBounds(onSurface) == false)
         {
+            //all good so buffer last good position
+            lastGoodPosition = transform.position;
+
             //all good so do key input and movement
             handleInput();
             handleMovement();
         }
 
         //we always deal with terrain and player facing
-        handleTerrain();
+        onSurface = handleTerrain();
         handleFacing();
                 
  
@@ -65,7 +75,8 @@ public class PlayerMotion : MonoBehaviour {
     {
         
         //clear out the move force each frame
-        moveForce *= 0;       
+        moveForce *= 0;
+        Debug.Log("handle movement");
 
         if (Input.GetKey(KeyCode.A) && energy > 0.0f)
         {
@@ -101,7 +112,11 @@ public class PlayerMotion : MonoBehaviour {
     void handleMovement()
     {
         //initial force of gravity
-        totalForce.Set(0, 0.0f , 0);
+        if(isJumping)                           //we want absolute control of jump
+            totalForce.Set(0, 0.0f , 0);
+        else
+            totalForce.Set(0, 1.0f, 0);
+
         totalForce *= GRAVITY_CONSTANT;
 
         //add our ship moveForce
@@ -119,13 +134,15 @@ public class PlayerMotion : MonoBehaviour {
         transform.position += velocity * Time.deltaTime;
 
         //decay velocity
+        float y = velocity.y;
         velocity *= friction;
+        velocity.Set(velocity.x, y, velocity.z);
         
-
     }
 
-    bool isOutOfBounds()
+    bool isOutOfBounds(bool isOnSurface)
     {
+        
         //keep the player within bounds
 
         /*
@@ -136,42 +153,26 @@ public class PlayerMotion : MonoBehaviour {
          * camera reasons
          * 
          */
-   
 
         bool ret = false;
 
-        if (transform.position.x > 30)
+        if (!isOnSurface)
         {
-            Vector3 pos = new Vector3(29.5f, transform.position.y, transform.position.z);
-            transform.position = pos;
-            velocity *= 0;
-            ret = true;
-        }
-        if (transform.position.x < 10)
-        {
-            Vector3 pos = new Vector3(10.5f, transform.position.y, transform.position.z);
-            transform.position = pos;
-            velocity *= 0;
-            ret = true;
-        }
-        if (transform.position.z > 99)
-        {
-            Vector3 pos = new Vector3(transform.position.x, transform.position.y, 98.5f);
-            transform.position = pos;
-            velocity *= 0;
-            ret = true;
-        }
-        if (transform.position.z < 1)
-        {
-            Vector3 pos = new Vector3(transform.position.x, transform.position.y, 1.5f);
-            transform.position = pos;
-            velocity *= 0;
-            ret = true;
-        }
 
+            Debug.Log("not on surface???");
+
+            transform.position = lastGoodPosition;
+
+            //TODO: angle of incidence == angle of refraction, assume perpendicular plane 
+            velocity *= -1;
+            ret = true;
+        }
+        else
+        {
+            ret = false;
+        }
         return ret;
-
-
+        
     }
 
     void handleFacing()
@@ -198,7 +199,9 @@ public class PlayerMotion : MonoBehaviour {
 
     }
 
-    void handleTerrain()
+
+    
+    bool handleTerrain()
     {
 
 
@@ -210,38 +213,64 @@ public class PlayerMotion : MonoBehaviour {
         Vector3 raycastPoint = transform.position;
         raycastPoint += new Vector3(0, 1, 0);
 
+        isOnPlatform = false;
+
         if (Physics.Raycast(raycastPoint, -Vector3.up, out hit, 100, layerMask))
         {
 
-            h = hit.point.y ;
+            h = hit.point.y;
+
+            if (hit.transform.tag == "MovingPlatform")
+            {
+                zmove = hit.transform.GetComponent<HorizontalMovingPlatform>().zMove;
+                isOnPlatform = true;
+                Vector3 pos = new Vector3(transform.position.x, transform.position.y, transform.position.z + zmove);
+                transform.position = pos; 
+            }
             
+        }
+        else
+        {
+            Debug.Log("NOT ON SURFACE");
+            return false;
+
         }
 
         terrainHeight = h + groundOffset;
 
         //ensure I am NEVER below the surface
-        if (transform.position.y < terrainHeight)
+        if (transform.position.y <= terrainHeight)
         {
             Vector3 pos = new Vector3(transform.position.x, terrainHeight, transform.position.z);
             transform.position = pos;
+            velocity.Scale( gravityNull);
+
         }
 
 
         //TODO: this should also be part of the state machine DAG???
+        /*
         if (!isJumping )
         {
-            //I'm below the surface, so push me up 
+            accel += 0.1f;
+
+            //I'm above surface , gravity down to it;
             Vector3 pos = new Vector3(transform.position.x,  terrainHeight, transform.position.z);
-            pos = Vector3.Lerp(transform.position, pos, Time.deltaTime * groundRate);
+            pos = Vector3.Lerp(transform.position, pos, Time.deltaTime * groundRate );
             transform.position = pos;
             
         }
+        */
+        return true;
 
     }
+      
 
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log(other.name);
+        Debug.Log("OnTriggerEnter " + other.name);
+        transform.position = lastGoodPosition;
+        velocity *= -1;
     }
 
 }
