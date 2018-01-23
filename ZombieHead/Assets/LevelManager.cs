@@ -30,29 +30,25 @@ public class LevelManager : MonoBehaviour {
         // Pressing "0" will load the Main Menu.
         if (Input.GetKey(KeyCode.Alpha0))
         {
-            SceneManager.LoadScene("MainMenu");
-            Debug.Log("Main Menu loaded.");
+            LoadMainMenu();
         }
 
         // Pressing "1" will load Level01.
         if (Input.GetKey(KeyCode.Alpha1))
         {
-            SceneManager.LoadScene("Level01");
-            Debug.Log("Level01 loaded.");
+            LoadLevel01();
         }
 
         // Pressing "2" will load Level02.
         if (Input.GetKey(KeyCode.Alpha2))
         {
-            SceneManager.LoadScene("Level02");
-            Debug.Log("Level02 loaded.");
+            LoadLevel02();
         }
 
         // Pressing "3" will load Level03.
         if (Input.GetKey(KeyCode.Alpha3))
         {
-            SceneManager.LoadScene("Level03");
-            Debug.Log("Level03 loaded.");
+            LoadLevel03();
         }
     }
 
@@ -60,5 +56,29 @@ public class LevelManager : MonoBehaviour {
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Debug.Log("Replaying " + SceneManager.GetActiveScene().name);
+    }
+
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+        Debug.Log("Main Menu loaded.");
+    }
+
+    public void LoadLevel01()
+    {
+        SceneManager.LoadScene("Level01");
+        Debug.Log("Level01 loaded.");
+    }
+
+    public void LoadLevel02()
+    {
+        SceneManager.LoadScene("Level02");
+        Debug.Log("Level02 loaded.");
+    }
+
+    public void LoadLevel03()
+    {
+        SceneManager.LoadScene("Level03");
+        Debug.Log("Level03 loaded.");
     }
 }
