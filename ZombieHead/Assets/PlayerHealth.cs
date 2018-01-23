@@ -18,7 +18,8 @@ public class PlayerHealth : MonoBehaviour {
 	void Update ()
     {
         // Kill the player if health points reach 0 or less.
-        // Currently only restarts level, but will be replaced with particle effects and 
+        // Currently only restarts level, but will be replaced with death effects and
+        // HUD notification at a later stage.
 		if (healthPoints < 0.0f)
         {
             levelManager.RestartCurrentLevel();
