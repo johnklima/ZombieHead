@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Pendulum : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    public float zMove = 0;
+
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -17,6 +19,8 @@ public class Pendulum : MonoBehaviour {
 
         Quaternion a = Quaternion.AngleAxis(s * Mathf.Rad2Deg, Vector3.right);
         transform.rotation = a;
+
+
 
 
     }

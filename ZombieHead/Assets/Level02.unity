@@ -3627,9 +3627,10 @@ GameObject:
   m_Component:
   - component: {fileID: 776333059}
   - component: {fileID: 776333060}
-  m_Layer: 0
+  - component: {fileID: 776333061}
+  m_Layer: 8
   m_Name: Vertical_Platform
-  m_TagString: Untagged
+  m_TagString: MovingPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3665,6 +3666,20 @@ MonoBehaviour:
   speed: 3
   ChildTransform: {fileID: 2003966344}
   transformB: {fileID: 1085199487}
+--- !u!64 &776333061
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 776333058}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 0}
 --- !u!1 &790198443
 GameObject:
   m_ObjectHideFlags: 0
@@ -10935,9 +10950,10 @@ GameObject:
   - component: {fileID: 2003966344}
   - component: {fileID: 2003966346}
   - component: {fileID: 2003966345}
+  - component: {fileID: 2003966347}
   m_Layer: 8
   m_Name: Lvl_2_Platform_2
-  m_TagString: MovingPlatform
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10995,6 +11011,20 @@ MeshFilter:
     type: 3}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2003966343}
+  m_Mesh: {fileID: 4300054, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
+--- !u!64 &2003966347
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2003966343}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300054, guid: 8de7063eafad82d4db67ed9a48011469, type: 3}
 --- !u!1 &2006721047
 GameObject:
