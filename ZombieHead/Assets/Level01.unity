@@ -580,6 +580,7 @@ MonoBehaviour:
   interpRate: 3
   initialRotation: {x: 0, y: 0, z: 0, w: 0}
   twist: 0
+  constrainX: 180
 --- !u!4 &63421359
 Transform:
   m_ObjectHideFlags: 0
@@ -641,9 +642,10 @@ MonoBehaviour:
   Bpos: {x: 0, y: 0, z: 0}
   parent: {fileID: 1628411004}
   child: {fileID: 579672352}
-  interpRate: 2
+  interpRate: 3
   initialRotation: {x: 0, y: 0, z: 0, w: 0}
   twist: 0
+  constrainX: 180
 --- !u!1 &76211738
 GameObject:
   m_ObjectHideFlags: 0
@@ -1590,9 +1592,10 @@ MonoBehaviour:
   Bpos: {x: 0, y: 0, z: 0}
   parent: {fileID: 68898734}
   child: {fileID: 0}
-  interpRate: 3
+  interpRate: 5
   initialRotation: {x: 0, y: 0, z: 0, w: 0}
   twist: 0
+  constrainX: 180
 --- !u!1 &595513234
 GameObject:
   m_ObjectHideFlags: 0
@@ -2662,6 +2665,7 @@ MonoBehaviour:
   interpRate: 3
   initialRotation: {x: 0, y: 0, z: 0, w: 0}
   twist: 0
+  constrainX: 180
 --- !u!4 &1383158846
 Transform:
   m_ObjectHideFlags: 0
@@ -3483,9 +3487,10 @@ MonoBehaviour:
   Bpos: {x: 0, y: 0, z: 0}
   parent: {fileID: 0}
   child: {fileID: 68898734}
-  interpRate: 2
+  interpRate: 0.5
   initialRotation: {x: 0, y: 0, z: 0, w: 0}
   twist: 0
+  constrainX: -30
 --- !u!1 &1638876517
 GameObject:
   m_ObjectHideFlags: 0

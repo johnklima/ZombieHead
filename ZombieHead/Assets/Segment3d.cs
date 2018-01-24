@@ -18,7 +18,7 @@ public class Segment3d : MonoBehaviour
     private IKSystem3d parentSystem;
     public Quaternion initialRotation;
     public float twist;
-
+    public float constrainX = 180;
      
     void Awake()
     {
@@ -83,6 +83,10 @@ public class Segment3d : MonoBehaviour
         //spherical interpolate
         float t = Time.deltaTime;                   
         Quaternion c = Quaternion.Slerp(a, b, t * ir);
+
+        //Vector3 euler = c.eulerAngles;
+        //euler.Set(euler.x - constrainX, euler.y, euler.z);
+        //c.eulerAngles = euler;
 
         transform.rotation = c;
 
