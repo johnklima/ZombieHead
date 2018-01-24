@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class ExitProgram : MonoBehaviour {
 
-	void doExitGame() 
+	public void Exit() 
 	{
+#if UNITY_EDITOR
 		Debug.Log ("We're quitting the game now!");
+		UnityEditor.EditorApplication.isPlaying = false;
+#else
 		Application.Quit();
+#endif
 	}
 }
