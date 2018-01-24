@@ -200,7 +200,7 @@ public class PlayerMotion : MonoBehaviour {
     }
 
 
-    
+    private static Vector3 rayoffset = new Vector3(0, 3, 0);
     bool handleTerrain()
     {
 
@@ -211,7 +211,7 @@ public class PlayerMotion : MonoBehaviour {
         int layerMask = GROUND_LAYER;
 
         Vector3 raycastPoint = transform.position;
-        raycastPoint += new Vector3(0, 1, 0);
+        raycastPoint += rayoffset;
 
         isOnPlatform = false;
 

@@ -35,7 +35,12 @@ public class PlatformMovment : MovingPlatform
 
     private void Move()
     {
+
+        Vector3 lastpos = ChildTransform.localPosition;
+
         ChildTransform.localPosition = Vector3.MoveTowards(ChildTransform.localPosition,nexPos,speed * Time.deltaTime);
+
+        zMove = lastpos.z - ChildTransform.localPosition.z;
 
         if (Vector3.Distance(ChildTransform.localPosition,nexPos) <= 0.1)
         {
