@@ -19,7 +19,7 @@ public class Segment3d : MonoBehaviour
     public Quaternion initialRotation;
     public float twist;
 
-
+     
     void Awake()
     {
         //aquire the length of this segment - the dummy geometry will always be child zero
