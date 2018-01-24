@@ -85,7 +85,7 @@ public class PlayerMotion : MonoBehaviour {
         float wf = Mathf.Sin(mytime);
         windForce.Set(0, 0.0f, wf);
         windForce *= MAX_WIND_CONSTANT;
-
+         
 
     }
     private void LateUpdate()
