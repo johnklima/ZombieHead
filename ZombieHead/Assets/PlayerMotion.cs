@@ -6,6 +6,9 @@ public class PlayerMotion : MonoBehaviour {
 
     //gravity in meters per second per second
     static float GRAVITY_CONSTANT = -9.8f;                      // -- for earth,  -1.6 for moon 
+    static float MAX_WIND_CONSTANT = 10.0f;                      // -- for earth,  -1.6 for moon 
+
+
     public Vector3 velocity = new Vector3(0, 0, 0);             //current direction and speed of movement
     public Vector3 acceleration = new Vector3(0, 0, 0);         //movement controlled by player movement force and gravity
 
@@ -40,12 +43,25 @@ public class PlayerMotion : MonoBehaviour {
     public bool onSurface = true;
     public Vector3 lastGoodPosition = new Vector3(0, 0, 0);
     public float accel = 1;
+
+    public Vector3 hillForceDir;
+    public float hillAngle;
+    public float hillFactor = 30;
+    public Vector3 polyNorm;
+
+    //wind
+    public Vector3 windForce = new Vector3(0, 0, 20);
+    float mytime = 0;
     // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
+    void Start ()
+    {
+
+        mytime = 0;
+
+    }
+
+    // Update is called once per frame
+    
 	void Update ()
     {
         //make sure we are within the defined bounds of our level
@@ -63,8 +79,14 @@ public class PlayerMotion : MonoBehaviour {
         //we always deal with terrain and player facing
         onSurface = handleTerrain();
         handleFacing();
-                
- 
+
+        //TODO dumb ass place to modulate wind
+        mytime += Time.deltaTime * Mathf.Abs(Mathf.Sin(Time.time));
+        float wf = Mathf.Sin(mytime);
+        windForce.Set(0, 0.0f, wf);
+        windForce *= MAX_WIND_CONSTANT;
+
+
     }
     private void LateUpdate()
     {
@@ -121,7 +143,8 @@ public class PlayerMotion : MonoBehaviour {
 
         //add our ship moveForce
         totalForce += moveForce;
-        
+        totalForce += hillForceDir;
+        totalForce += windForce;
         
         //maybe some wind?
         //forces += wind * Mathf.Sin(Time.time);
@@ -219,6 +242,15 @@ public class PlayerMotion : MonoBehaviour {
         {
 
             h = hit.point.y;
+
+            polyNorm = hit.normal;
+            hillForceDir = Vector3.Cross(polyNorm, Vector3.right);
+            hillAngle = Vector3.SignedAngle(polyNorm, Vector3.up, Vector3.right);
+
+            //the force the hill apply from 0-1 max
+            float hillForce = (hillAngle / 90) * hillFactor;
+            hillForceDir *= hillForce;
+           
 
             if (hit.transform.tag == "MovingPlatform")
             {
