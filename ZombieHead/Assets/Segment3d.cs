@@ -16,6 +16,8 @@ public class Segment3d : MonoBehaviour
     public float interpRate = 3;
 
     private IKSystem3d parentSystem;
+    public Quaternion initialRotation;
+    public float twist;
 
 
     void Awake()
@@ -23,6 +25,8 @@ public class Segment3d : MonoBehaviour
         //aquire the length of this segment - the dummy geometry will always be child zero
         length = transform.GetChild(0).localScale.z;
         parentSystem = transform.GetComponentInParent<IKSystem3d>();
+        initialRotation = transform.GetChild(0).rotation;
+        
     }
 
     public void updateSegmentAndChildren()
@@ -65,8 +69,7 @@ public class Segment3d : MonoBehaviour
         transform.LookAt(target);                   //look at target
         Quaternion b = transform.rotation;          //get new rotation
         transform.rotation = a;                     //set it back
-
-      
+        
         
         //if the system is in drag mode, we want to crank the interpolation
         //otherwise, the chain is "lazy," it doesnt need to do anything
@@ -79,7 +82,16 @@ public class Segment3d : MonoBehaviour
         Quaternion c = Quaternion.Slerp(a, b, t * ir);
 
         transform.rotation = b;// c;   //ignore interpolation, unpredictable results
-        
+
+        //twist back local rotation on geometry so it returns to forward facing
+        //get the angle between player forward and geom Y
+        Vector3 v1 = transform.right;
+        Vector3 v2 = transform.parent.right;
+        twist = Vector3.Angle(v1,v2);
+
+        transform.Rotate(Vector3.forward, twist, Space.Self);
+
+
     }
 
     

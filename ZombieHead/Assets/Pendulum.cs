@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pendulum : MonoBehaviour {
+public class Pendulum : MovingPlatform {
 
     public float zMove = 0;
 
