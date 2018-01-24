@@ -8,6 +8,8 @@ public class PlayerHealth : MonoBehaviour {
 
     public GameObject Player;
 
+	public GameObject canvasObject;
+
     public float healthPoints = 100.0f;
 
     // References are set to private since we're calling them via the script.
@@ -54,7 +56,8 @@ public class PlayerHealth : MonoBehaviour {
         if (healthPoints < 0.0f && livesManager.lives > 0.9f)
         {
             livesManager.RemoveLife();
-            levelManager.RestartCurrentLevel();
+			canvasObject.SetActive(true);
+            //levelManager.RestartCurrentLevel();
             Debug.Log("Player died! Player has " + (livesManager.lives) + " lives left. Restarting current level.");
         }
 
