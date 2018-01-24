@@ -2745,6 +2745,11 @@ MonoBehaviour:
   onSurface: 1
   lastGoodPosition: {x: 0, y: 0, z: 0}
   accel: 1
+  hillForceDir: {x: 0, y: 0, z: 0}
+  hillAngle: 0
+  hillFactor: 30
+  polyNorm: {x: 0, y: 0, z: 0}
+  windForce: {x: 0, y: 0, z: 20}
 --- !u!114 &1792661808
 MonoBehaviour:
   m_ObjectHideFlags: 0
