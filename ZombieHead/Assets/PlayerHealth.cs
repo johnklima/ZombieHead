@@ -2,17 +2,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour {
 
     public GameObject Player;
 
-    public float lives;
     public float healthPoints = 100.0f;
 
     // References are set to private since we're calling them via the script.
+    // Manager scripts:
     private LevelManager levelManager;
     private LivesManager livesManager;
+
+    // HUD Images:
+    private Image heart1Full;
+    private Image heart1Empty;
+    private Image heart2Full;
+    private Image heart2Empty;
+    private Image heart3Full;
+    private Image heart3Empty;
 
     // Use this for initialization
     void Start ()
@@ -22,37 +31,100 @@ public class PlayerHealth : MonoBehaviour {
         levelManager = GameObject.Find("GameManager").GetComponentInChildren<LevelManager>();
         livesManager = GameObject.Find("GameManager").GetComponentInChildren<LivesManager>();
 
-        lives = livesManager.lives;
+        heart1Full = GameObject.Find("fullHeart1").GetComponentInChildren<Image>();
+        heart1Empty = GameObject.Find("emptyHeart1").GetComponentInChildren<Image>();
+        heart2Full = GameObject.Find("fullHeart2").GetComponentInChildren<Image>();
+        heart2Empty = GameObject.Find("emptyHeart2").GetComponentInChildren<Image>();
+        heart3Full = GameObject.Find("fullHeart3").GetComponentInChildren<Image>();
+        heart3Empty = GameObject.Find("emptyHeart3").GetComponentInChildren<Image>();
+
+        // Here we tell that the lostLife bool in LivesManager should be set to false
+        // once Unity loads and reloads the level. This will let us play animations
+        // and effects on death, without losing more than 1 life despite the player
+        // taking damage constantly.
+        livesManager.lostLife = false;
     }
 
     // Update is called once per frame
     void Update ()
     {
-
         // Kill the player if health points reach 0 or less.
         // Currently only restarts level, but will be replaced with death effects and
         // HUD notification at a later stage.
-
-        if (healthPoints < 0.0f)
+        if (healthPoints < 0.0f && livesManager.lives > 0.9f)
         {
             livesManager.RemoveLife();
-            Debug.Log("Player died! Player has " + lives + " lives left. Restarting current level.");
             levelManager.RestartCurrentLevel();
+            Debug.Log("Player died! Player has " + (livesManager.lives) + " lives left. Restarting current level.");
         }
 
-
-        // We check how many lives the player has left, and if it goes below 0, we reset the lives and level.
-
-        livesManager.CheckLives();
-
-        if (lives < 0.0f)
+        // Change heart count depending on remaining lives.
+        if (livesManager.lives > 2.9f)
         {
-            livesManager.ResetLives();
-            levelManager.RestartCurrentLevel();
-            Debug.Log("Game Over. Restarting current level.");
+            ThreeHearts();
         }
 
+        else if (livesManager.lives > 1.9f)
+        {
+            TwoHearts();
+        }
+
+        else if (livesManager.lives > 0.9f)
+        {
+            OneHeart();
+        }
+
+        // We check how many lives the player has left, and if it goes below 0.8f, we reset the lives and level.
+       else if (livesManager.lives < 0.8f)
+        {
+            NoHearts();
+            levelManager.LoadMainMenu();
+            Debug.Log("Game over.");
+        }
 	}
+
+    // Change heart count depending on remaining lives. We do this by toggling the images on/off,
+    // which will also allow us to play animations on active elements later.
+    void ThreeHearts ()
+    {
+        heart1Full.enabled = true;
+        heart1Empty.enabled = false;
+        heart2Full.enabled = true;
+        heart2Empty.enabled = false;
+        heart3Full.enabled = true;
+        heart3Empty.enabled = false;
+
+    }
+
+    void TwoHearts ()
+    {
+        heart1Full.enabled = true;
+        heart1Empty.enabled = false;
+        heart2Full.enabled = true;
+        heart2Empty.enabled = false;
+        heart3Full.enabled = false;
+        heart3Empty.enabled = true;
+    }
+
+    void OneHeart ()
+    {
+        heart1Full.enabled = true;
+        heart1Empty.enabled = false;
+        heart2Full.enabled = false;
+        heart2Empty.enabled = true;
+        heart3Full.enabled = false;
+        heart3Empty.enabled = true;
+    }
+
+    void NoHearts ()
+    {
+        heart1Full.enabled = false;
+        heart1Empty.enabled = true;
+        heart2Full.enabled = false;
+        heart2Empty.enabled = true;
+        heart3Full.enabled = false;
+        heart3Empty.enabled = true;
+    }
 
     // Subtract 200.0f HP if player's collision box collides with the collison boxes of spikes.
     void OnTriggerEnter (Collider collisionDamage)
