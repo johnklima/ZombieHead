@@ -1228,6 +1228,106 @@ MonoBehaviour:
   initialRotation: {x: 0, y: 0, z: 0, w: 0}
   twist: 0
   constrainX: 180
+--- !u!1001 &346883700
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 224154470639671578, guid: c4243ec6b57657248b1878f70188a86f,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224154470639671578, guid: c4243ec6b57657248b1878f70188a86f,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224154470639671578, guid: c4243ec6b57657248b1878f70188a86f,
+        type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224154470639671578, guid: c4243ec6b57657248b1878f70188a86f,
+        type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224154470639671578, guid: c4243ec6b57657248b1878f70188a86f,
+        type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224154470639671578, guid: c4243ec6b57657248b1878f70188a86f,
+        type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224154470639671578, guid: c4243ec6b57657248b1878f70188a86f,
+        type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224154470639671578, guid: c4243ec6b57657248b1878f70188a86f,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 224154470639671578, guid: c4243ec6b57657248b1878f70188a86f,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224154470639671578, guid: c4243ec6b57657248b1878f70188a86f,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224154470639671578, guid: c4243ec6b57657248b1878f70188a86f,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224154470639671578, guid: c4243ec6b57657248b1878f70188a86f,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224154470639671578, guid: c4243ec6b57657248b1878f70188a86f,
+        type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224154470639671578, guid: c4243ec6b57657248b1878f70188a86f,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224154470639671578, guid: c4243ec6b57657248b1878f70188a86f,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224154470639671578, guid: c4243ec6b57657248b1878f70188a86f,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224154470639671578, guid: c4243ec6b57657248b1878f70188a86f,
+        type: 2}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224154470639671578, guid: c4243ec6b57657248b1878f70188a86f,
+        type: 2}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: c4243ec6b57657248b1878f70188a86f, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &457436989 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100064, guid: f42b70a2c1b227d419a94869cc2ef8d5, type: 3}
@@ -3708,6 +3808,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lives: 3
+  lostLife: 1
 --- !u!1 &1624113677
 GameObject:
   m_ObjectHideFlags: 0
@@ -4451,7 +4552,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 1792661805}
-  lives: 3
   healthPoints: 100
 --- !u!1 &1793678011
 GameObject:
