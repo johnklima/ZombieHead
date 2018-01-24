@@ -182,6 +182,41 @@ ModelImporter:
     4300064: Lvl_1_v4_0_Spike_6
     4300066: Lvl_1_v4_0_Spike_7
     4300068: Surface_1_Lvl_1_v4_0
+    6400000: Lvl_1_v4_0_Brazier_1
+    6400002: Lvl_1_v4_0_Brazier_2
+    6400004: Lvl_1_v4_0_Brazier_3
+    6400006: Lvl_1_v4_0_Brazier_4
+    6400008: Lvl_1_v4_0_Brazier_5
+    6400010: Lvl_1_v4_0_Coffin
+    6400012: Lvl_1_v4_0_Coffin_Bottom
+    6400014: Lvl_1_v4_0_Coffin_Top
+    6400016: Lvl_1_v4_0_Cross
+    6400018: Lvl_1_v4_0_Fancy_Coffin
+    6400020: Lvl_1_v4_0_Grave_1
+    6400022: Lvl_1_v4_0_Grave_2
+    6400024: Lvl_1_v4_0_Grave_3
+    6400026: Lvl_1_v4_0_Grave_4
+    6400028: Lvl_1_v4_0_Grave_5
+    6400030: Lvl_1_v4_0_Grave_6
+    6400032: Lvl_1_v4_0_Grave_7
+    6400034: Lvl_1_v4_0_Grave_8
+    6400036: Lvl_1_v4_0_Grave_9
+    6400038: Lvl_1_v4_0_Large_Brazier_1
+    6400040: Lvl_1_v4_0_Large_Brazier_2
+    6400042: Lvl_1_v4_0_Rock_1
+    6400044: Lvl_1_v4_0_Rock_2
+    6400046: Lvl_1_v4_0_Rock_3
+    6400048: Lvl_1_v4_0_Rock_4
+    6400050: Lvl_1_v4_0_Round_Cross
+    6400052: Lvl_1_v4_0_Sides_1
+    6400054: Lvl_1_v4_0_Spike_1
+    6400056: Lvl_1_v4_0_Spike_2
+    6400058: Lvl_1_v4_0_Spike_3
+    6400060: Lvl_1_v4_0_Spike_4
+    6400062: Lvl_1_v4_0_Spike_5
+    6400064: Lvl_1_v4_0_Spike_6
+    6400066: Lvl_1_v4_0_Spike_7
+    6400068: Surface_1_Lvl_1_v4_0
   materials:
     importMaterials: 1
     materialName: 0
@@ -211,7 +246,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
