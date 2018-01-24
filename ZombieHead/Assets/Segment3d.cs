@@ -31,6 +31,7 @@ public class Segment3d : MonoBehaviour
 
     public void updateSegmentAndChildren()
     {
+        length = transform.GetChild(0).localScale.z;
 
         updateSegment();
 
@@ -76,21 +77,26 @@ public class Segment3d : MonoBehaviour
         float ir = interpRate;
         if (parentSystem.isDragging)
             ir *= 10;
-        
+
+  
+
         //spherical interpolate
         float t = Time.deltaTime;                   
         Quaternion c = Quaternion.Slerp(a, b, t * ir);
 
-        transform.rotation = b;// c;   //ignore interpolation, unpredictable results
+        transform.rotation = c;
 
         //twist back local rotation on geometry so it returns to forward facing
         //get the angle between player forward and geom Y
+        /*
+        
         Vector3 v1 = transform.right;
         Vector3 v2 = transform.parent.right;
-        twist = Vector3.Angle(v1,v2);
+        twist = Vector3.Angle(v1, v2);
 
         transform.Rotate(Vector3.forward, twist, Space.Self);
-
+       
+         */
 
     }
 
