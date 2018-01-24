@@ -8,7 +8,7 @@ public class JohnJumping : AnimationScript
     // Use this for initialization
     void Start()
     {
-
+         
 
     }
 
