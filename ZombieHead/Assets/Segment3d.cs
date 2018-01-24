@@ -84,12 +84,8 @@ public class Segment3d : MonoBehaviour
         float t = Time.deltaTime;                   
         Quaternion c = Quaternion.Slerp(a, b, t * ir);
 
-        //Vector3 euler = c.eulerAngles;
-        //euler.Set(euler.x - constrainX, euler.y, euler.z);
-        //c.eulerAngles = euler;
-
         transform.rotation = c;
-
+        transform.Rotate(Vector3.left, constrainX * Time.deltaTime, Space.Self);
         //twist back local rotation on geometry so it returns to forward facing
         //get the angle between player forward and geom Y
         /*
