@@ -17,7 +17,7 @@ public class JohnHeadRoll : AnimationScript {
 	// Update is called once per frame
 	void Update () {
 
-        theHead.transform.Rotate(Vector3.right, - playerMotion.velocity.magnitude * rollFactor * Time.deltaTime );
+        theHead.transform.Rotate(Vector3.right, playerMotion.velocity.magnitude * rollFactor * Time.deltaTime );
 		
 	}
 }

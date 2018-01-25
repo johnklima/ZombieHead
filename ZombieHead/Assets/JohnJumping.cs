@@ -5,6 +5,8 @@ using UnityEngine;
 public class JohnJumping : AnimationScript
 {
 
+    public Transform target;
+
     // Use this for initialization
     void Start()
     {

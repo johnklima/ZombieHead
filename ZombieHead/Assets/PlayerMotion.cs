@@ -87,7 +87,7 @@ public class PlayerMotion : MonoBehaviour {
 
         //TODO: dumb ass place to modulate wind - put this in the tree component
         //TODO: this equation can be almost anything that produces a smooth value 0-1, try Perlin!!
-        windTimer += Time.deltaTime * Mathf.Abs( Mathf.Sin( Time.time ) ) / Mathf.Abs(Mathf.Sin(Time.time + 0.3f));
+        windTimer += Time.deltaTime * Mathf.Abs(Mathf.Sin(Time.time));
 
         float wf = Mathf.Sin(windTimer);
         windForce.Set(0, 0.0f, wf);
@@ -148,9 +148,19 @@ public class PlayerMotion : MonoBehaviour {
 
         totalForce *= GRAVITY_CONSTANT;
 
-        //add our ship moveForce
+        //add our character moveForce
         totalForce += moveForce;
         totalForce += hillForceDir;
+
+        //compare wind direction to our movement direction
+        //should this be required
+        Vector3 mf = windForce.normalized;
+        Vector3 v = velocity.normalized;
+        Vector3 wf = windForce;
+        float ang = Vector3.SignedAngle(mf, v, Vector3.right);
+        if (ang < 0)
+            wf = windForce * -1;
+
         totalForce += windForce;
         
         //maybe some wind?
