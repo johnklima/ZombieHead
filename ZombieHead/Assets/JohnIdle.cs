@@ -7,7 +7,7 @@ public class JohnIdle : AnimationScript
 
     //we need to accumulate time so when the anim is disabled. it continues from where it left off
     private float accumTime = 0;
-    Transform target;
+    public Transform target;
     
     
     // Use this for initialization
