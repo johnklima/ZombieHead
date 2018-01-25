@@ -8,7 +8,8 @@ public class PlayerHealth : MonoBehaviour {
 
     public GameObject Player;
 
-	public GameObject canvasObject;
+	public GameObject retryScreen;
+    public GameObject GameOverScreen;
 
     public float healthPoints = 100.0f;
 
@@ -45,19 +46,24 @@ public class PlayerHealth : MonoBehaviour {
         // and effects on death, without losing more than 1 life despite the player
         // taking damage constantly.
         livesManager.lostLife = false;
+
+        retryScreen.SetActive(false);
+        GameOverScreen.SetActive(false);
     }
 
     // Update is called once per frame
     void Update ()
     {
+        if (Input.GetKeyDown("b"))
+            healthPoints -= 101.0f;
+
         // Kill the player if health points reach 0 or less.
         // Currently only restarts level, but will be replaced with death effects and
         // HUD notification at a later stage.
         if (healthPoints < 0.0f && livesManager.lives > 0.9f)
         {
             livesManager.RemoveLife();
-			canvasObject.SetActive(true);
-            //levelManager.RestartCurrentLevel();
+            retryScreen.SetActive(true);
             Debug.Log("Player died! Player has " + (livesManager.lives) + " lives left. Restarting current level.");
         }
 
@@ -78,10 +84,11 @@ public class PlayerHealth : MonoBehaviour {
         }
 
         // We check how many lives the player has left, and if it goes below 0.8f, we reset the lives and level.
-       else if (livesManager.lives < 0.8f)
+        else if (livesManager.lives < 0.1f)
         {
             NoHearts();
-            levelManager.LoadMainMenu();
+            retryScreen.SetActive(false);
+            GameOverScreen.SetActive(true);
             Debug.Log("Game over.");
         }
 	}
