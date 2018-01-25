@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class JohnWalking : AnimationScript
+public class JohnDrag : AnimationScript
 {
 
     //we need to accumulate time so when the anim is disabled. it continues from where it left off
@@ -13,12 +13,13 @@ public class JohnWalking : AnimationScript
     public Transform target;
 
     // Use this for initialization
-    void Start () {
-		
+    void Start()
+    {
+
     }
-	
+
     // Update is called once per frame
-    void Update ()
+    void Update()
     {
 
         //move the target ball back and forth
@@ -26,6 +27,6 @@ public class JohnWalking : AnimationScript
         float z = Mathf.Sin(accumTime * 4.0f);
 
         target.transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, z);
-		
+
     }
 }

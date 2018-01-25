@@ -21,11 +21,18 @@ public class RootState : MonoBehaviour {
         IdleState idlestate = new IdleState(this);        
         m_childStates.Add(idlestate);
 
+        //head roll state has priority over squirm (torso), drag(arms), and walk (legs)
+        HeadRollState rollstate = new HeadRollState(this);
+        idlestate.addChildState(rollstate);
+
         WalkState walkstate = new WalkState(this);
         idlestate.addChildState(walkstate);
 
         JumpState jumpstate = new JumpState(this);
         walkstate.addChildState(jumpstate);
+
+
+
 
 
     }

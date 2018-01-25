@@ -2881,7 +2881,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1302978208}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.285854, y: 0.47, z: 13.978265}
+  m_LocalPosition: {x: 15.75, y: 0.47, z: 13.978265}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1638876520}
@@ -3329,27 +3329,10 @@ MonoBehaviour:
   player: {fileID: 1792661806}
   CameraTargets: {fileID: 1341540373}
   lookRate: 3
---- !u!1 &1411837012 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 100002, guid: 38fa551142f7c574280fc684cb5bb78c, type: 3}
-  m_PrefabInternal: {fileID: 62397736}
 --- !u!4 &1411837013 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400002, guid: 38fa551142f7c574280fc684cb5bb78c, type: 3}
   m_PrefabInternal: {fileID: 62397736}
---- !u!114 &1411837014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1411837012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2221d95e45d2e534db2cf4b99f644cd1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerMotion: {fileID: 1792661807}
-  rollFactor: 100
 --- !u!1 &1418051828
 GameObject:
   m_ObjectHideFlags: 0
@@ -4596,6 +4579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24cf52e269c3a1441bc2f26c7bc66d78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
 --- !u!1 &1792661805
 GameObject:
   m_ObjectHideFlags: 0
@@ -4604,12 +4588,15 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1792661806}
-  - component: {fileID: 1792661807}
-  - component: {fileID: 1792661808}
-  - component: {fileID: 1792661809}
   - component: {fileID: 1792661810}
+  - component: {fileID: 1792661807}
   - component: {fileID: 1792661811}
   - component: {fileID: 1792661812}
+  - component: {fileID: 1792661808}
+  - component: {fileID: 1792661809}
+  - component: {fileID: 1792661814}
+  - component: {fileID: 1792661813}
+  - component: {fileID: 1792661815}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -4624,7 +4611,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1792661805}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.85, y: 1.58, z: 5.4}
+  m_LocalPosition: {x: 5.39, y: 1.58, z: 8.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1748714022}
@@ -4648,9 +4635,12 @@ MonoBehaviour:
   acceleration: {x: 0, y: 0, z: 0}
   moveForce: {x: 0, y: 0, z: 0}
   totalForce: {x: 0, y: 0, z: 0}
-  walk: {fileID: 1748714023}
-  idle: {fileID: 0}
+  walk: {fileID: 1792661813}
+  idle: {fileID: 1792661814}
   jump: {fileID: 1792661809}
+  roll: {fileID: 1792661815}
+  squirm: {fileID: 0}
+  drag: {fileID: 0}
   mass: 1
   energy: 1
   verticalForce: 18
@@ -4662,15 +4652,14 @@ MonoBehaviour:
   groundRate: 1
   isJumping: 0
   isOnPlatform: 0
+  isOnSurface: 1
   zmove: 0
   terrainHeight: 0
-  onSurface: 1
   lastGoodPosition: {x: 0, y: 0, z: 0}
-  accel: 1
   hillForceDir: {x: 0, y: 0, z: 0}
   hillAngle: 0
   hillFactor: 30
-  polyNorm: {x: 0, y: 0, z: 0}
+  hillPolyNorm: {x: 0, y: 0, z: 0}
   windForce: {x: 0, y: 0, z: 20}
 --- !u!114 &1792661808
 MonoBehaviour:
@@ -4736,6 +4725,43 @@ MonoBehaviour:
   energyText: {fileID: 1457500866}
   speedSlider: {fileID: 1679726416}
   playerMotion: {fileID: 1792661807}
+--- !u!114 &1792661813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1792661805}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e54af1615d473ff4dbebb010a8eda85e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1748714022}
+--- !u!114 &1792661814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1792661805}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1350157ce31a4e446aa477d0838bc45d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1792661815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1792661805}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2221d95e45d2e534db2cf4b99f644cd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMotion: {fileID: 1792661807}
+  theHead: {fileID: 1411837013}
+  rollFactor: 100
 --- !u!1 &1793678011
 GameObject:
   m_ObjectHideFlags: 0

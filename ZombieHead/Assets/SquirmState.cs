@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WalkState : StateNode {
+public class SquirmState : StateNode
+{
 
     public Vector3 velocity;
-        
+
     //constructor
-    public WalkState(RootState root)
+    public SquirmState(RootState root)
     {
         rootState = root;
         m_childStates = new List<StateNode>();
@@ -25,12 +26,12 @@ public class WalkState : StateNode {
             p_isInState = false;
 
             //disable the animation
-            rootState.playermotion.walk.enabled = false;
+            rootState.playermotion.squirm.enabled = false;
 
             //since a child state is true, return this fact!
             return true;
         }
-        
+
         //get the velocity
         Vector3 velo = rootState.playermotion.velocity;
 
@@ -48,14 +49,14 @@ public class WalkState : StateNode {
         if (p_isInState)
         {
             //do something
-            Debug.Log("IN WALKING");
-            rootState.playermotion.walk.enabled = true;
+            Debug.Log("IN SQUIRM");
+            rootState.playermotion.squirm.enabled = true;
         }
         else
         {
             //clean up my state
             //disable the animation
-            rootState.playermotion.walk.enabled = false;
+            rootState.playermotion.squirm.enabled = false;
 
         }
 

@@ -6,6 +6,8 @@ using UnityEngine;
 public class FinkWalking : AnimationScript
 {
 
+    public Transform target;
+
     // Use this for initialization
     void Start()
     {
@@ -21,7 +23,7 @@ public class FinkWalking : AnimationScript
         float z = Mathf.Sin(t * 4.0f);
         float y = Mathf.Sin(t * 7.5f);
 
-        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, z);
+        target.transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, z);
 
     }
 }

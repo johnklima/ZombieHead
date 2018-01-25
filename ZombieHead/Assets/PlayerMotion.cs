@@ -21,6 +21,9 @@ public class PlayerMotion : MonoBehaviour {
     public AnimationScript walk;
     public AnimationScript idle;
     public AnimationScript jump;
+    public AnimationScript roll;
+    public AnimationScript squirm;
+    public AnimationScript drag;
 
     static int GROUND_LAYER = 1 << 8;
 
@@ -35,28 +38,29 @@ public class PlayerMotion : MonoBehaviour {
     public float groundOffset = 1.0f;                    //how high off ground (terrain)
     public float groundRate = 1.0f;
 
+    //surface/walkable handling
     public bool isJumping = false;
     public bool isOnPlatform = false;
+    public bool isOnSurface = true;
     public float zmove = 0;
     public float terrainHeight = 0;
-
-    public bool onSurface = true;
     public Vector3 lastGoodPosition = new Vector3(0, 0, 0);
-    public float accel = 1;
-
+    
+    //HILL handling 
     public Vector3 hillForceDir;
     public float hillAngle;
     public float hillFactor = 30;
-    public Vector3 polyNorm;
+    public Vector3 hillPolyNorm;
 
     //wind
     public Vector3 windForce = new Vector3(0, 0, 20);
-    float mytime = 0;
+    private float windTimer = 0;
+
     // Use this for initialization
     void Start ()
     {
 
-        mytime = 0;
+        windTimer = 0;
 
     }
 
@@ -66,7 +70,7 @@ public class PlayerMotion : MonoBehaviour {
     {
         //make sure we are within the defined bounds of our level
         //isOutOfBounds returns True if we are out of bounds
-        if (isOutOfBounds(onSurface) == false)
+        if (isOutOfBounds(isOnSurface) == false)
         {
             //all good so buffer last good position
             lastGoodPosition = transform.position;
@@ -77,12 +81,14 @@ public class PlayerMotion : MonoBehaviour {
         }
 
         //we always deal with terrain and player facing
-        onSurface = handleTerrain();
+        isOnSurface = handleTerrain();
         handleFacing();
 
-        //TODO dumb ass place to modulate wind
-        mytime += Time.deltaTime * Mathf.Abs(Mathf.Sin(Time.time));
-        float wf = Mathf.Sin(mytime);
+        //TODO: dumb ass place to modulate wind - put this in the tree component
+        //TODO: this equation can be almost anything that produces a smooth value 0-1, try Perlin!!
+        windTimer += Time.deltaTime * Mathf.Abs( Mathf.Sin( Time.time ) ) / Mathf.Abs(Mathf.Sin(Time.time + 0.3f));
+
+        float wf = Mathf.Sin(windTimer);
         windForce.Set(0, 0.0f, wf);
         windForce *= MAX_WIND_CONSTANT;
          
@@ -243,9 +249,9 @@ public class PlayerMotion : MonoBehaviour {
 
             h = hit.point.y;
 
-            polyNorm = hit.normal;
-            hillForceDir = Vector3.Cross(polyNorm, Vector3.right);
-            hillAngle = Vector3.SignedAngle(polyNorm, Vector3.up, Vector3.right);
+            hillPolyNorm = hit.normal;
+            hillForceDir = Vector3.Cross(hillPolyNorm, Vector3.right);
+            hillAngle = Vector3.SignedAngle(hillPolyNorm, Vector3.up, Vector3.right);
 
             //the force the hill apply from 0-1 max
             float hillForce = (hillAngle / 90) * hillFactor;
@@ -282,19 +288,6 @@ public class PlayerMotion : MonoBehaviour {
         }
 
 
-        //TODO: this should also be part of the state machine DAG???
-        /*
-        if (!isJumping )
-        {
-            accel += 0.1f;
-
-            //I'm above surface , gravity down to it;
-            Vector3 pos = new Vector3(transform.position.x,  terrainHeight, transform.position.z);
-            pos = Vector3.Lerp(transform.position, pos, Time.deltaTime * groundRate );
-            transform.position = pos;
-            
-        }
-        */
         return true;
 
     }
@@ -304,7 +297,9 @@ public class PlayerMotion : MonoBehaviour {
     {
         Debug.Log("OnTriggerEnter " + other.name);
         transform.position = lastGoodPosition;
-        velocity *= -1;
+        
+        //TODO: improve collision handling        
+        velocity *= -1;           //bounce
     }
 
 }

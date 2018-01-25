@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JohnHeadRoll : MonoBehaviour {
+public class JohnHeadRoll : AnimationScript {
 
 
     public PlayerMotion playerMotion;
+    public Transform theHead; 
     public float rollFactor = 1;
 
 	// Use this for initialization
@@ -16,7 +17,7 @@ public class JohnHeadRoll : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        transform.Rotate(Vector3.right, - playerMotion.velocity.magnitude * rollFactor * Time.deltaTime );
+        theHead.transform.Rotate(Vector3.right, - playerMotion.velocity.magnitude * rollFactor * Time.deltaTime );
 		
 	}
 }
