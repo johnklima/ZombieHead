@@ -69,6 +69,8 @@ public class PlayerMotion : MonoBehaviour {
     
 	void Update ()
     {
+
+        energy = 1;
         //make sure we are within the defined bounds of our level
         //isOutOfBounds returns True if we are out of bounds
         if (isOutOfBounds(isOnSurface) == false)
@@ -161,7 +163,7 @@ public class PlayerMotion : MonoBehaviour {
         if (ang < 0)
             wf = windForce * -1;
 
-        totalForce += windForce;
+        //totalForce += windForce;
         
         //maybe some wind?
         //forces += wind * Mathf.Sin(Time.time);
@@ -268,7 +270,7 @@ public class PlayerMotion : MonoBehaviour {
             float hillForce = (hillAngle / 90) * hillFactor;
             hillForceDir *= hillForce;
            
-
+            
             if (hit.transform.tag == "MovingPlatform")
             {
 
@@ -279,6 +281,7 @@ public class PlayerMotion : MonoBehaviour {
                 Vector3 pos = new Vector3(transform.position.x + xmove, transform.position.y, transform.position.z + zmove);
                 transform.position = pos; 
             }
+            
             
         }
         else
