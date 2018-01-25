@@ -43,6 +43,7 @@ public class PlayerMotion : MonoBehaviour {
     public bool isOnPlatform = false;
     public bool isOnSurface = true;
     public float zmove = 0;
+    public float xmove = 0;
     public float terrainHeight = 0;
     public Vector3 lastGoodPosition = new Vector3(0, 0, 0);
     
@@ -263,8 +264,9 @@ public class PlayerMotion : MonoBehaviour {
 
                 Debug.Log("On Moving Platform");
                 zmove = hit.transform.GetComponent<MovingPlatform>().zMove;
+                xmove = hit.transform.GetComponent<MovingPlatform>().xMove;
                 isOnPlatform = true;
-                Vector3 pos = new Vector3(transform.position.x, transform.position.y, transform.position.z + zmove);
+                Vector3 pos = new Vector3(transform.position.x + xmove, transform.position.y, transform.position.z + zmove);
                 transform.position = pos; 
             }
             
@@ -301,5 +303,12 @@ public class PlayerMotion : MonoBehaviour {
         //TODO: improve collision handling        
         velocity *= -1;           //bounce
     }
-
+  
 }
+
+
+
+
+
+
+
