@@ -7701,7 +7701,7 @@ MonoBehaviour:
   Player: {fileID: 1792661805}
   bloodSplat: {fileID: 1265152955}
   retryScreen: {fileID: 2093579694}
-  GameOverScreen: {fileID: 1799919886}
+  gameOverScreen: {fileID: 1799919886}
   healthPoints: 100
 --- !u!114 &1792661812
 MonoBehaviour:

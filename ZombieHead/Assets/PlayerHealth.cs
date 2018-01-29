@@ -12,7 +12,7 @@ public class PlayerHealth : MonoBehaviour
     public ParticleSystem bloodSplat;
 
     public GameObject retryScreen;
-    public GameObject GameOverScreen;
+    public GameObject gameOverScreen;
 
     public float healthPoints = 100.0f;
 
@@ -51,11 +51,11 @@ public class PlayerHealth : MonoBehaviour
         livesManager.lostLife = false;
 
         retryScreen.SetActive(false);
-        GameOverScreen.SetActive(false);
+        gameOverScreen.SetActive(false);
 
 
         //Resets timeScale at start.
-        //Time.timeScale = 1.0f;
+        Time.timeScale = 1.0f;
     }
 
     // Update is called once per frame
@@ -92,7 +92,7 @@ public class PlayerHealth : MonoBehaviour
         {
             NoHearts();
             retryScreen.SetActive(false);
-            GameOverScreen.SetActive(true);
+            gameOverScreen.SetActive(true);
             Debug.Log("Game over.");
         }
     }
@@ -149,7 +149,7 @@ public class PlayerHealth : MonoBehaviour
             bloodSplat.Play();
 
             //Lowers timeScale after death for a slow-motion effect.
-            //Time.timeScale = 0.2f;
+            Time.timeScale = 0.2f;
         }
     }
 }
