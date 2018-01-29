@@ -63,6 +63,8 @@ public class PlayerMotion : MonoBehaviour {
 
         windTimer = 0;
 
+        lastGoodPosition = transform.position;
+
     }
 
     // Update is called once per frame

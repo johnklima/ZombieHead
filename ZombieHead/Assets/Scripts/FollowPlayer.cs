@@ -22,8 +22,8 @@ public class FollowPlayer : MonoBehaviour {
 
         //force the camera to follow the ship
         float z = player.position.z;
-        float x = player.position.x  + 10  ;//camtarget.x;
-        float y = player.position.y  + 4 ; //camtarget.y;
+        float x = player.position.x  + camtarget.x + 10;
+        float y = player.position.y  + camtarget.y;
 
         Vector3 campos = new Vector3(x, y, z);
 

@@ -8,7 +8,7 @@ public class JohnIdle : AnimationScript
     //we need to accumulate time so when the anim is disabled. it continues from where it left off
     private float accumTime = 0;
     public Transform target;
-    
+    public float ymove = 0;
     
     // Use this for initialization
 	void Start () {
@@ -19,9 +19,15 @@ public class JohnIdle : AnimationScript
 	void Update ()
     {
         
-        accumTime += Time.deltaTime;        
-        float y = Mathf.Sin(accumTime * 4.0f) * 0.5f;
-        target.transform.localPosition = new Vector3(transform.localPosition.x, y, transform.localPosition.z);
+        accumTime += Time.deltaTime;
+        ymove = Mathf.Sin(accumTime * 4.0f) *0.5f;
+
+        Vector3 pos = Vector3.zero;
+        pos.Set( target.transform.localPosition.x,
+                 ymove,
+                 target.transform.localPosition.z);
+
+        target.transform.localPosition = pos;
 
     }
 }
