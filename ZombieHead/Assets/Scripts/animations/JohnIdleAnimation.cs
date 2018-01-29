@@ -2,8 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/*
+ * 1. COPY/PASTE AND RENAME THIS FILE AND THE CLASS NAME BELOW TO "YourNameBlahAnimation"
+ * 2. ASSOCIATE IT TO YOUR COPY OF THE ZOMBIE PREFAB
+ * 3. RECONNECT TARGETS
+ * 
+ */
+
+
 public class JohnIdleAnimation : AnimationScript
 {
+
+    
 
     public float frequency = 2;
     public float amplitude = 1.5f;
