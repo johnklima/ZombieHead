@@ -1143,7 +1143,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &140977317
 GameObject:
@@ -2860,12 +2860,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 882449790}
   m_LocalRotation: {x: -0.0058986777, y: 0.0057731364, z: -0.018351858, w: 0.9997975}
-  m_LocalPosition: {x: 0, y: 0, z: 56.8}
+  m_LocalPosition: {x: 20.24, y: 2.17, z: 50.186623}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1950743369}
-  m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_Father: {fileID: 1035320263}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -0.66400003, y: 0.674, z: -2.107}
 --- !u!114 &882449792
 MonoBehaviour:
@@ -3167,6 +3167,10 @@ Prefab:
       propertyPath: m_Name
       value: JohntargetLegRight
       objectReference: {fileID: 0}
+    - target: {fileID: 1456723928124602, guid: 5ff8d5e5392cc5047818b7b8eb3b084e, type: 2}
+      propertyPath: m_Name
+      value: PlayerBodyTemplate
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5ff8d5e5392cc5047818b7b8eb3b084e, type: 2}
   m_IsPrefabParent: 0
@@ -3193,6 +3197,11 @@ Transform:
 --- !u!4 &1035320262 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4722398161784556, guid: 5ff8d5e5392cc5047818b7b8eb3b084e,
+    type: 2}
+  m_PrefabInternal: {fileID: 1035320257}
+--- !u!4 &1035320263 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4779229768341548, guid: 5ff8d5e5392cc5047818b7b8eb3b084e,
     type: 2}
   m_PrefabInternal: {fileID: 1035320257}
 --- !u!1 &1096729215
