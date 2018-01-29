@@ -66,19 +66,19 @@ public class LevelManager : MonoBehaviour {
 
     public void LoadLevel01()
     {
-        SceneManager.LoadScene("Level01");
+        SceneManager.LoadScene("New_Level01");
         Debug.Log("Level01 loaded.");
     }
 
     public void LoadLevel02()
     {
-        SceneManager.LoadScene("Level02");
+        SceneManager.LoadScene("New_Level02");
         Debug.Log("Level02 loaded.");
     }
 
     public void LoadLevel03()
     {
-        SceneManager.LoadScene("Level03");
+        SceneManager.LoadScene("New_Level03");
         Debug.Log("Level03 loaded.");
     }
 }
