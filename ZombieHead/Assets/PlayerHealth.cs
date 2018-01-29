@@ -4,12 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerHealth : MonoBehaviour {
+public class PlayerHealth : MonoBehaviour
+{
 
     public GameObject Player;
 
-	public GameObject retryScreen;
-    public GameObject GameOverScreen;
+    public ParticleSystem bloodSplat;
+
+    public GameObject retryScreen;
+    public GameObject gameOverScreen;
 
     public float healthPoints = 100.0f;
 
@@ -27,7 +30,7 @@ public class PlayerHealth : MonoBehaviour {
     private Image heart3Empty;
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         // GameObject references will be lost on RestartCurrentLevel() so we find and retrieve
         // these references again once the level loads.
@@ -48,15 +51,16 @@ public class PlayerHealth : MonoBehaviour {
         livesManager.lostLife = false;
 
         retryScreen.SetActive(false);
-        GameOverScreen.SetActive(false);
+        gameOverScreen.SetActive(false);
+
+
+        //Resets timeScale at start.
+        Time.timeScale = 1.0f;
     }
 
     // Update is called once per frame
-    void Update ()
+    void Update()
     {
-        if (Input.GetKeyDown("b"))
-            healthPoints -= 101.0f;
-
         // Kill the player if health points reach 0 or less.
         // Currently only restarts level, but will be replaced with death effects and
         // HUD notification at a later stage.
@@ -88,14 +92,14 @@ public class PlayerHealth : MonoBehaviour {
         {
             NoHearts();
             retryScreen.SetActive(false);
-            GameOverScreen.SetActive(true);
+            gameOverScreen.SetActive(true);
             Debug.Log("Game over.");
         }
-	}
+    }
 
     // Change heart count depending on remaining lives. We do this by toggling the images on/off,
     // which will also allow us to play animations on active elements later.
-    void ThreeHearts ()
+    void ThreeHearts()
     {
         heart1Full.enabled = true;
         heart1Empty.enabled = false;
@@ -106,7 +110,7 @@ public class PlayerHealth : MonoBehaviour {
 
     }
 
-    void TwoHearts ()
+    void TwoHearts()
     {
         heart1Full.enabled = true;
         heart1Empty.enabled = false;
@@ -116,7 +120,7 @@ public class PlayerHealth : MonoBehaviour {
         heart3Empty.enabled = true;
     }
 
-    void OneHeart ()
+    void OneHeart()
     {
         heart1Full.enabled = true;
         heart1Empty.enabled = false;
@@ -126,7 +130,7 @@ public class PlayerHealth : MonoBehaviour {
         heart3Empty.enabled = true;
     }
 
-    void NoHearts ()
+    void NoHearts()
     {
         heart1Full.enabled = false;
         heart1Empty.enabled = true;
@@ -137,11 +141,15 @@ public class PlayerHealth : MonoBehaviour {
     }
 
     // Subtract 200.0f HP if player's collision box collides with the collison boxes of spikes.
-    void OnTriggerEnter (Collider collisionDamage)
+    void OnTriggerEnter(Collider collisionDamage)
     {
         if (collisionDamage.gameObject.tag == "Spikes")
         {
             healthPoints -= 200.0f;
+            bloodSplat.Play();
+
+            //Lowers timeScale after death for a slow-motion effect.
+            Time.timeScale = 0.2f;
         }
     }
 }
