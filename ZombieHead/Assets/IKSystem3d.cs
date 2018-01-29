@@ -6,6 +6,7 @@ public class IKSystem3d : MonoBehaviour
 {
     public Segment3d[] segments;
     public Transform target = null;
+    public Transform parentTransform;
 
     public bool isReaching = false;
     public bool isDragging = false;
@@ -15,6 +16,9 @@ public class IKSystem3d : MonoBehaviour
 
     private bool wasDragging = false;
     public int childcount = 0;
+
+    public bool useAltIK = false;
+    public bool useCCD = false;
 
     // Use this for initialization
     void Awake()
@@ -40,7 +44,36 @@ public class IKSystem3d : MonoBehaviour
     void Update()
     {
 
-      
+        Vector3 position = Vector3.zero;
+        Quaternion rotation = Quaternion.identity;
+
+        //if we assigned a parent xform, move to origin (ik with constraints)
+        if (parentTransform)
+        {
+            position = parentTransform.position;
+            rotation = parentTransform.rotation;
+
+
+            parentTransform.position = Vector3.zero;
+            parentTransform.rotation = Quaternion.identity;
+        }
+
+        if (useCCD)
+        {
+            //to be implemented
+            firstSegment.reachCCD(target.position);
+
+        }
+            
+        
+        if (useAltIK)
+        {
+            // call reach on the first
+            firstSegment.reachAlt(target.position);
+            return;
+
+        }
+
         if (isDragging)
         {
             
@@ -74,6 +107,13 @@ public class IKSystem3d : MonoBehaviour
 
 
 
+        }
+
+        //move back
+        if (parentTransform)
+        {
+            parentTransform.position = position;
+            parentTransform.rotation = rotation;
         }
     }
 }
