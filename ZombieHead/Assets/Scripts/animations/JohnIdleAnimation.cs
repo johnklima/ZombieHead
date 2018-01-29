@@ -37,17 +37,20 @@ public class JohnIdleAnimation : AnimationScript
     public Transform targetLegRight;
     public Transform targetArmLeft;
     public Transform targetArmRight;
-    public Vector3[] positionArray = new Vector3[4];
 
+    public Vector3[] positionArray = new Vector3[4];
     public int curPosition = 0;
-    
+
+    public float zlegLeft;
+    public float zlegRight;
+
     // Use this for initialization
     void Start ()
     {
         phase = 0;
-        deltaT = Vector3.zero;
         localTime = 0;
 
+        //example of using an array of locations to move the target
         positionArray[0] = new Vector3(0.0f, 0.0f, 0.0f);
         positionArray[1] = new Vector3(1.0f, 0.0f, 5.0f);
         positionArray[2] = new Vector3(0.2f, 0.3f, 1.4f);
@@ -84,14 +87,24 @@ public class JohnIdleAnimation : AnimationScript
             localTime = 0;
         }
 
+
+        zlegLeft = Mathf.Sin(  frequency * Time.time + Mathf.PI  ) * amplitude;
+        zlegRight = Mathf.Sin(  frequency * Time.time            ) * amplitude;
+
+        curTlegleft.Set(targetLegLeft.localPosition.x, targetLegLeft.localPosition.y, zlegLeft);
+        targetLegLeft.localPosition = curTlegleft;
+
+        curTlegright.Set(targetLegRight.localPosition.x, targetLegRight.localPosition.y, zlegRight);
+        targetLegRight.localPosition = curTlegright;
+
+
         /*
 
         float z1 = Mathf.Sin( localTime + (phase + Mathf.PI * frequency) ) * amplitude;
         float z2 = Mathf.Sin( localTime + (phase + Mathf.PI * frequency) ) * amplitude;
         float z3 = Mathf.Sin((localTime + phase) * frequency) * amplitude;
 
-        float z4 = Mathf.Sin( (localTime + Mathf.PI) ) * amplitude;
-        float z5 = Mathf.Sin( localTime   ) * amplitude;
+
 
 
         curThead.Set(targetHead.localPosition.x, targetHead.localPosition.y, deltaT.z + z1);        
@@ -103,11 +116,6 @@ public class JohnIdleAnimation : AnimationScript
         curTarmright.Set(targetArmRight.localPosition.x, targetArmRight.localPosition.y, deltaT.z + z3);
         targetArmRight.localPosition = curTarmright;
 
-        curTlegleft.Set(targetLegLeft.localPosition.x, targetLegLeft.localPosition.y, deltaT.z + z4);
-        targetLegLeft.localPosition = curTlegleft;
-
-        curTlegright.Set(targetLegRight.localPosition.x, targetLegRight.localPosition.y, deltaT.z + z5);
-        targetLegRight.localPosition = curTlegright;
          */
 
 
