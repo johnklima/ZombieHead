@@ -601,7 +601,7 @@ MonoBehaviour:
   child: {fileID: 1383158845}
   interpRate: 1
   useInterpolation: 1
-  useConstraints: 1
+  useConstraints: 0
   modLostAngles: 1
   extraX: 0
   extraY: 0
@@ -683,7 +683,7 @@ MonoBehaviour:
   child: {fileID: 579672352}
   interpRate: 3
   useInterpolation: 1
-  useConstraints: 1
+  useConstraints: 0
   modLostAngles: 1
   extraX: 0
   extraY: 0
@@ -2249,7 +2249,7 @@ MonoBehaviour:
   child: {fileID: 0}
   interpRate: 5
   useInterpolation: 1
-  useConstraints: 1
+  useConstraints: 0
   modLostAngles: 1
   extraX: 0
   extraY: 0
@@ -2680,7 +2680,7 @@ MonoBehaviour:
   child: {fileID: 63421358}
   interpRate: 1
   useInterpolation: 1
-  useConstraints: 1
+  useConstraints: 0
   modLostAngles: 1
   extraX: 0
   extraY: 0
@@ -3768,7 +3768,7 @@ MonoBehaviour:
   child: {fileID: 0}
   interpRate: 3
   useInterpolation: 1
-  useConstraints: 1
+  useConstraints: 0
   modLostAngles: 1
   extraX: 0
   extraY: 0
@@ -4084,7 +4084,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   segments: []
   target: {fileID: 1498071201}
-  parentTransform: {fileID: 0}
+  parentTransform: {fileID: 1302978209}
   isReaching: 1
   isDragging: 0
   childcount: 0
@@ -4096,7 +4096,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1432391921}
-  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.35, z: -1.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4105,7 +4105,7 @@ Transform:
   - {fileID: 1383158846}
   m_Father: {fileID: 1302978209}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1457500866 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114901160987877312, guid: c4243ec6b57657248b1878f70188a86f,
@@ -4644,7 +4644,7 @@ MonoBehaviour:
   child: {fileID: 68898734}
   interpRate: 0.5
   useInterpolation: 1
-  useConstraints: 1
+  useConstraints: 0
   modLostAngles: 1
   extraX: 0
   extraY: 0
