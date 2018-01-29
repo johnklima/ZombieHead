@@ -264,7 +264,7 @@ public class PlayerMotion : MonoBehaviour {
 
             hillPolyNorm = hit.normal;
             hillForceDir = Vector3.Cross(hillPolyNorm, Vector3.right);
-            hillAngle = Vector3.SignedAngle(hillPolyNorm, Vector3.up, Vector3.right);
+            //hillAngle = Vector3.SignedAngle(hillPolyNorm, Vector3.up, Vector3.right);
 
             //the force the hill apply from 0-1 max
             float hillForce = (hillAngle / 90) * hillFactor;
