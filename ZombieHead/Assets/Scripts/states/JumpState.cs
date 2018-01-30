@@ -15,7 +15,7 @@ public class  JumpState: StateNode
     public float jumpHeight = 4.0f;
     public float jumpDistance = 6.0f;
     
-
+    public Vector3 jumpVelocity = new Vector3(0, 0, 0);
     private Vector3 jumpVector = new Vector3(0, 0, 0);
 
     //constructor
@@ -54,6 +54,8 @@ public class  JumpState: StateNode
             stateProgress = (int) StateProgessStates.Start;
 
             jumpVector *= 0;            //ensure jump vector starts at zero
+            jumpVelocity *= 0;
+
             initialY = rootState.playermotion.gameObject.transform.position.y;
 
             Debug.Log("Jump init");
@@ -104,8 +106,12 @@ public class  JumpState: StateNode
                 // set y position absolute
                 jumpVector.Set(jumpVector.x,  finalH , jumpVector.z);
 
+                //update a jump velocity that is applied at end of jump
+                jumpVelocity = rootState.playermotion.gameObject.transform.position;
                 //set player position accordingly - this is absolute position
                 rootState.playermotion.gameObject.transform.position = jumpVector;
+                //velocity is just the difference between frames
+                jumpVelocity -= jumpVector;
 
                 //ignore physics velocity when in jump - for now just kill it
                 rootState.playermotion.velocity *= 0;
