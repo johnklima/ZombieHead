@@ -110,8 +110,7 @@ public class  JumpState: StateNode
                 jumpVelocity = rootState.playermotion.gameObject.transform.position;
                 //set player position accordingly - this is absolute position
                 rootState.playermotion.gameObject.transform.position = jumpVector;
-                //velocity is just the difference between frames
-                jumpVelocity -= jumpVector;
+                
 
                 //ignore physics velocity when in jump - for now just kill it
                 rootState.playermotion.velocity *= 0;
@@ -119,6 +118,9 @@ public class  JumpState: StateNode
                 if (Time.time - jumptimer > durationOfJump)
                 {
                     stateProgress = (int)StateProgessStates.Fall;
+                    //velocity is just the difference between frames, plus a constant
+                    jumpVelocity = (jumpVector - jumpVelocity) * 20.0f;
+                    rootState.playermotion.velocity = jumpVelocity;
                 }
 
                 if (rootState.playermotion.gameObject.transform.position.y < rootState.playermotion.terrainHeight)
@@ -129,9 +131,16 @@ public class  JumpState: StateNode
             else if (stateProgress == (int)StateProgessStates.Fall)
             {
 
-                rootState.playermotion.velocity = -jumpVelocity;
+                Debug.Log("In Fall " + 
+                    rootState.playermotion.gameObject.transform.position.y + 
+                    " < " + rootState.playermotion.terrainHeight);
 
-                if (rootState.playermotion.gameObject.transform.position.y < rootState.playermotion.terrainHeight)
+                
+                rootState.playermotion.jump.enabled = false;
+                rootState.playermotion.isJumping = false;
+                rootState.playermotion.isFalling = true;
+
+                if (rootState.playermotion.gameObject.transform.position.y < rootState.playermotion.terrainHeight + 0.2f)
                 {
                     stateProgress = (int)StateProgessStates.Land;
                 }
