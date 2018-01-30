@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,7 +16,7 @@ public class PlayerMotion : MonoBehaviour {
     public Vector3 totalForce = new Vector3(0, 0, 0);           //total of ALL forces applied
 
     private Vector3 gravityNull = new Vector3(1, 0, 1);
-    
+     
     //character animation scripts triggered by state machine
     public AnimationScript walk;
     public AnimationScript idle;
