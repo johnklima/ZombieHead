@@ -38,6 +38,9 @@ public class PlayerMotion : MonoBehaviour {
     public float groundOffset = 1.0f;                    //how high off ground (terrain)
     public float groundRate = 1.0f;
 
+    //Referencing PlayerHealth.cs to access BloodSplatter().
+    PlayerHealth playerHealth;
+
     //surface/walkable handling
     public bool isJumping = false;
     public bool isOnPlatform = false;
@@ -66,6 +69,8 @@ public class PlayerMotion : MonoBehaviour {
 
         lastGoodPosition = transform.position;
 
+        //Getting reference to PlayerHealth.cs on start.
+        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerHealth>();
     }
 
     // Update is called once per frame
@@ -325,6 +330,12 @@ public class PlayerMotion : MonoBehaviour {
         {
             Debug.Log("WORM BITES ME");
             energy -= 0.2f;
+            playerHealth.BloodSplatter();
+        }
+
+        else if (other.gameObject.tag == "Spikes")
+        {
+            velocity *= 0.1f;
         }
     }
   
