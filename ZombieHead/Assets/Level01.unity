@@ -6444,11 +6444,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-<<<<<<< HEAD
   - {fileID: 2100000, guid: 5f787ac19fe96db4599a379cd8b0f838, type: 2}
-=======
-  - {fileID: 2100000, guid: 16aedb8037418e8489808cc425ec7212, type: 2}
->>>>>>> b711f028be1fb65e75407c7a1ec816aa2be4a5ff
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14009,12 +14005,8 @@ MonoBehaviour:
   hillAngle: 0
   hillFactor: 30
   hillPolyNorm: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD
-  windForce: {x: 0, y: 0, z: 20}
-=======
   windForce: {x: 0, y: 0, z: 0}
   windFactor: 1
->>>>>>> b711f028be1fb65e75407c7a1ec816aa2be4a5ff
 --- !u!114 &1792661808
 MonoBehaviour:
   m_ObjectHideFlags: 0
