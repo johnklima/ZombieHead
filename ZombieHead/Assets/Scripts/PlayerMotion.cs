@@ -6,7 +6,7 @@ public class PlayerMotion : MonoBehaviour {
 
     //gravity in meters per second per second
     static float GRAVITY_CONSTANT = -9.8f;                      // -- for earth,  -1.6 for moon 
-    static float MAX_WIND_CONSTANT = 10.0f;                      
+    static float MAX_WIND_CONSTANT = 10.0f;                      // -- for earth,  -1.6 for moon 
 
 
     public Vector3 velocity = new Vector3(0, 0, 0);             //current direction and speed of movement
@@ -55,7 +55,6 @@ public class PlayerMotion : MonoBehaviour {
 
     //wind
     public Vector3 windForce = new Vector3(0, 0, 20);
-    public float windFactor = 1.0f;                     //scalar to tweek wind effect 
     private float windTimer = 0;
 
     // Use this for initialization
@@ -73,10 +72,7 @@ public class PlayerMotion : MonoBehaviour {
 	void Update ()
     {
 
-
-        //TODO: add powerups and start decrementing energy
-        //energy = 1;
-
+        energy = 1;
         //make sure we are within the defined bounds of our level
         //isOutOfBounds returns True if we are out of bounds
         if (isOutOfBounds(isOnSurface) == false)
@@ -99,7 +95,7 @@ public class PlayerMotion : MonoBehaviour {
 
         float wf = Mathf.Sin(windTimer);
         windForce.Set(0, 0.0f, wf);
-        windForce *= MAX_WIND_CONSTANT * windFactor;
+        windForce *= MAX_WIND_CONSTANT;
          
 
     }
@@ -114,9 +110,6 @@ public class PlayerMotion : MonoBehaviour {
         //clear out the move force each frame
         moveForce *= 0;
         Debug.Log("handle movement");
-
-        //TODO: enable energy consumption
-        float energy = 1.0f;
 
         if (Input.GetKey(KeyCode.A) && energy > 0.0f)
         {
@@ -164,6 +157,7 @@ public class PlayerMotion : MonoBehaviour {
         totalForce += hillForceDir;
 
         //compare wind direction to our movement direction
+        //should this be required
         Vector3 mf = windForce.normalized;
         Vector3 v = velocity.normalized;
         Vector3 wf = windForce;
@@ -171,9 +165,12 @@ public class PlayerMotion : MonoBehaviour {
         if (ang < 0)
             wf = windForce * -1;
 
-        totalForce += windForce;
+        //totalForce += windForce;
         
-        
+        //maybe some wind?
+        //forces += wind * Mathf.Sin(Time.time);
+        //Debug.Log (Mathf.Sin (Time.time));
+
         acceleration = totalForce / mass;
         velocity += acceleration * Time.deltaTime;
 
@@ -269,9 +266,9 @@ public class PlayerMotion : MonoBehaviour {
 
             hillPolyNorm = hit.normal;
             hillForceDir = Vector3.Cross(hillPolyNorm, Vector3.right);
-            hillAngle = Vector3.SignedAngle(hillPolyNorm, Vector3.up, Vector3.right);
+            //hillAngle = Vector3.SignedAngle(hillPolyNorm, Vector3.up, Vector3.right);
 
-            //the force the hill will apply from 0-1 max
+            //the force the hill apply from 0-1 max
             float hillForce = (hillAngle / 90) * hillFactor;
             hillForceDir *= hillForce;
            
@@ -320,12 +317,6 @@ public class PlayerMotion : MonoBehaviour {
         
         //TODO: improve collision handling        
         velocity *= -1;           //bounce
-
-        if (other.gameObject.tag == "NPCcollision")
-        {
-            Debug.Log("WORM BITES ME");
-            energy -= 0.2f;
-        }
     }
   
 }

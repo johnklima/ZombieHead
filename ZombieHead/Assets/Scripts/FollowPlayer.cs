@@ -7,8 +7,6 @@ public class FollowPlayer : MonoBehaviour {
     public Transform player;
     public Transform CameraTargets;                     //list of world positions for camera distance
     public float lookRate = 3.0f;
-    public bool targetToCamera = true;
-    public bool targetToPlayer = false;
 
     // Use this for initialization
     void Start()
@@ -22,7 +20,7 @@ public class FollowPlayer : MonoBehaviour {
 
         Vector3 camtarget = findNearestCameraTarget();
 
-        //force the camera to follow the player
+        //force the camera to follow the ship
         float z = player.position.z;
         float x = player.position.x  + camtarget.x + 10;
         float y = player.position.y  + camtarget.y + 5;
@@ -63,13 +61,7 @@ public class FollowPlayer : MonoBehaviour {
 
         foreach (Transform child in CameraTargets)
         {
-            float distance = 0;
-
-            if (targetToPlayer)
-                distance = Vector3.Distance(player.transform.position, child.position);
-            if (targetToCamera)
-                distance = Vector3.Distance(transform.position, child.position);
-
+            float distance = Vector3.Distance(transform.position, child.position);
             if (distance < epsilon)
             {
                 epsilon = distance;

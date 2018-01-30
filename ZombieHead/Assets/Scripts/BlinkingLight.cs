@@ -4,34 +4,24 @@ using UnityEngine;
 public class BlinkingLight : MonoBehaviour
 {
 
-    public float timer;
+    public float Seconds;    
+    public float Intensity;     
+    public Light myLight;
 
-    private Light light;
-
-    private float waitTime = 1;
-
-    private void Start()
+    public IEnumerator GetFlashNow()
     {
-        timer = Time.time;
+        float waitTime = Seconds / 2;
 
-        light = transform.GetComponent<Light>();
-    }
-    private void Update()
-    {
-
-        if (Time.time - timer > waitTime)
+        while (myLight.intensity < Intensity)
         {
-            timer = Time.time;
-            waitTime = Random.RandomRange(0.5f, 2.0f);
-
-            light.enabled = !light.enabled;
-
+            myLight.intensity += Time.deltaTime / waitTime;
+            yield return null;
         }
-
-
-
+        while (myLight.intensity > 0)
+        {
+            myLight.intensity -= Time.deltaTime / waitTime;
+            yield return null;
+        }
+        yield return null;
     }
-
-
-
 }
