@@ -8,6 +8,7 @@ TagManager:
   - Spikes
   - GameManager
   - LevelManager
+  - NPCcollision
   layers:
   - Default
   - TransparentFX
