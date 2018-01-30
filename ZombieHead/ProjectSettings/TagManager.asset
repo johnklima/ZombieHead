@@ -9,6 +9,8 @@ TagManager:
   - GameManager
   - LevelManager
   - NPCcollision
+  - Ladder
+  - Axe
   layers:
   - Default
   - TransparentFX
