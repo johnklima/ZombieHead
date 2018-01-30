@@ -350,13 +350,16 @@ public class PlayerMotion : MonoBehaviour {
             lastGoodPosition = transform.position;
 
         }
+
+		if (other.gameObject.tag == "PickUpEnergy")
+		{
+			//hide powerup on contact
+			other.gameObject.SetActive (false);
+		}
+
     }
   
 }
-
-
-
-
 
 
 
