@@ -5572,12 +5572,17 @@ Prefab:
       propertyPath: m_Name
       value: ZombiePrefabAlexander
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 1763662458640966, guid: ed9a8e94511fa4a439aa4e4ad76775d9, type: 2}
+      propertyPath: m_Name
+      value: AlexanderIdleAnimation
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114040691348005868, guid: ed9a8e94511fa4a439aa4e4ad76775d9, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: ed9a8e94511fa4a439aa4e4ad76775d9, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &804263463 stripped
 GameObject:
-  m_PrefabParentObject: {fileID: 1244474107830366, guid: ed9a8e94511fa4a439aa4e4ad76775d9,
+  m_PrefabParentObject: {fileID: 1763662458640966, guid: ed9a8e94511fa4a439aa4e4ad76775d9,
     type: 2}
   m_PrefabInternal: {fileID: 804263462}
 --- !u!4 &804263464 stripped
