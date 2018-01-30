@@ -33,7 +33,11 @@ public class IdleState : StateNode
 
         //lets just say I am true, which in fact I always am if none of my children are true
         //as IDLE is the first state under root
-        p_isInState = true;
+        if(rootState.playermotion.isDead)
+            p_isInState = false;
+        else
+            p_isInState = false;
+
         if (p_isInState)
         {
             //do something

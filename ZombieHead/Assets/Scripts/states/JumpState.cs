@@ -7,7 +7,7 @@ using UnityEngine;
 public class  JumpState: StateNode
 {
 
-    private enum StateProgessStates { Start, InAir, Land};
+    private enum StateProgessStates { Start, InAir, Fall, Land};
     private int stateProgress = 0;
     private float jumptimer = 0;
     private float initialY = 0;
@@ -84,7 +84,7 @@ public class  JumpState: StateNode
                  * first we must scale PI (an angle) by our current time increment. basically we want to
                  * count from 0 to PI over time, to pass to Sine
                 */
-                float f = Mathf.PI  * ((Time.time - jumptimer) / durationOfJump);
+                float f = Mathf.PI * ((Time.time - jumptimer) / durationOfJump);
                 float h = Mathf.Sin(f) * jumpHeight; //amplitude is height
 
                 //next get the player forward vector
@@ -92,19 +92,19 @@ public class  JumpState: StateNode
 
                 //mult x,z by time passed as a function of delta time
                 fwd *= dt * jumpDistance;//frequency is distance
-                
+
                 // replace Y with 0
                 fwd.Set(fwd.x, 0, fwd.z);
-                
+
                 // add forward motion to current position
                 jumpVector = rootState.playermotion.gameObject.transform.position + fwd;
 
-                float finalH =  initialY + 
-                                h + 
+                float finalH = initialY +
+                                h +
                                 rootState.playermotion.groundOffset;
 
                 // set y position absolute
-                jumpVector.Set(jumpVector.x,  finalH , jumpVector.z);
+                jumpVector.Set(jumpVector.x, finalH, jumpVector.z);
 
                 //update a jump velocity that is applied at end of jump
                 jumpVelocity = rootState.playermotion.gameObject.transform.position;
@@ -118,7 +118,7 @@ public class  JumpState: StateNode
 
                 if (Time.time - jumptimer > durationOfJump)
                 {
-                    stateProgress = (int)StateProgessStates.Land;
+                    stateProgress = (int)StateProgessStates.Fall;
                 }
 
                 if (rootState.playermotion.gameObject.transform.position.y < rootState.playermotion.terrainHeight)
@@ -126,12 +126,24 @@ public class  JumpState: StateNode
                     stateProgress = (int)StateProgessStates.Land;
                 }
             }
+            else if (stateProgress == (int)StateProgessStates.Fall)
+            {
+
+                rootState.playermotion.velocity = -jumpVelocity;
+
+                if (rootState.playermotion.gameObject.transform.position.y < rootState.playermotion.terrainHeight)
+                {
+                    stateProgress = (int)StateProgessStates.Land;
+                }
+
+            }
             else if (stateProgress == (int)StateProgessStates.Land)
             {
                 //return to the ground
                 Debug.Log("Land");
                 rootState.playermotion.jump.enabled = false;
                 rootState.playermotion.isJumping = false;
+                rootState.playermotion.isFalling = false;
                 p_isInState = false;
             }
 

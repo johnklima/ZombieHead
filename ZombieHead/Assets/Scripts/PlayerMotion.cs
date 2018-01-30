@@ -43,8 +43,10 @@ public class PlayerMotion : MonoBehaviour {
 
     //surface/walkable handling
     public bool isJumping = false;
+    public bool isFalling = false;
     public bool isOnPlatform = false;
     public bool isOnSurface = true;
+    public bool isDead = false;
     public float zmove = 0;
     public float xmove = 0;
     public float terrainHeight = 0;
@@ -66,7 +68,7 @@ public class PlayerMotion : MonoBehaviour {
     {
 
         windTimer = 0;
-
+        isDead = false;
         lastGoodPosition = transform.position;
 
         //Getting reference to PlayerHealth.cs on start.
@@ -79,12 +81,15 @@ public class PlayerMotion : MonoBehaviour {
     {
 
 
+        if (isDead)
+            return;
+
         //TODO: add powerups and start decrementing energy
         //energy = 1;
 
         //make sure we are within the defined bounds of our level
         //isOutOfBounds returns True if we are out of bounds
-        if (isOutOfBounds(isOnSurface) == false)
+        if (isOutOfBounds(isOnSurface) == false && !isDead)
         {
             //all good so buffer last good position
             lastGoodPosition = transform.position;
@@ -187,7 +192,11 @@ public class PlayerMotion : MonoBehaviour {
 
         //decay velocity
         float y = velocity.y;
-        velocity *= friction;
+        if (!isFalling)
+        {
+            velocity *= friction;
+        }
+
         velocity.Set(velocity.x, y, velocity.z);
         
     }
@@ -335,7 +344,11 @@ public class PlayerMotion : MonoBehaviour {
 
         else if (other.gameObject.tag == "Spikes")
         {
-            velocity *= 0.1f;
+            //we are totally dead
+            velocity *= 0;
+            isDead = true;
+            lastGoodPosition = transform.position;
+
         }
     }
   
