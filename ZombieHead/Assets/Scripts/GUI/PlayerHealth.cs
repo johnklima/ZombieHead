@@ -140,13 +140,18 @@ public class PlayerHealth : MonoBehaviour
         heart3Empty.enabled = true;
     }
 
+    public void BloodSplatter()
+    {
+        bloodSplat.Play();
+    }
+
     // Subtract 200.0f HP if player's collision box collides with the collison boxes of spikes.
     void OnTriggerEnter(Collider collisionDamage)
     {
         if (collisionDamage.gameObject.tag == "Spikes")
         {
             healthPoints -= 200.0f;
-            bloodSplat.Play();
+            BloodSplatter();
 
             //Lowers timeScale after death for a slow-motion effect.
             Time.timeScale = 0.2f;
