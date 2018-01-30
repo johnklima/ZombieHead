@@ -75,7 +75,7 @@ public class PlayerMotion : MonoBehaviour {
 
 
         //TODO: add powerups and start decrementing energy
-        energy = 1;
+        //energy = 1;
 
         //make sure we are within the defined bounds of our level
         //isOutOfBounds returns True if we are out of bounds
@@ -114,6 +114,9 @@ public class PlayerMotion : MonoBehaviour {
         //clear out the move force each frame
         moveForce *= 0;
         Debug.Log("handle movement");
+
+        //TODO: enable energy consumption
+        float energy = 1.0f;
 
         if (Input.GetKey(KeyCode.A) && energy > 0.0f)
         {
@@ -317,6 +320,12 @@ public class PlayerMotion : MonoBehaviour {
         
         //TODO: improve collision handling        
         velocity *= -1;           //bounce
+
+        if (other.gameObject.tag == "NPCcollision")
+        {
+            Debug.Log("WORM BITES ME");
+            energy -= 0.2f;
+        }
     }
   
 }
