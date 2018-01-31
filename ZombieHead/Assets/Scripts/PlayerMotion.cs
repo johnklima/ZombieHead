@@ -100,6 +100,16 @@ public class PlayerMotion : MonoBehaviour {
         if (isDead)
             return;
 
+        if (Time.time - correctionTimer > 1)
+        {
+
+            //reset timer after some seconds
+            
+                correctionTimer = -1;
+
+        }
+
+
         //TODO: add powerups and start decrementing energy
         //energy = 1;
 
@@ -115,17 +125,12 @@ public class PlayerMotion : MonoBehaviour {
             if (!isJumping)
             {
                 handleInput();
-            }
-
-            handleMovement();
+            }           
            
         }
-        else if( correctionTimer > 0)
-        {
             
-            handleMovement();
-        }
-
+        handleMovement();
+        
         //we always deal with terrain and player facing
         isOnSurface = handleTerrain();
         handleFacing();
@@ -148,8 +153,7 @@ public class PlayerMotion : MonoBehaviour {
     void handleInput()
     {
         
-        //clear out the move force each frame
-        moveForce *= 0;
+        
         Debug.Log("handle movement");
 
         //TODO: enable energy consumption
@@ -227,17 +231,18 @@ public class PlayerMotion : MonoBehaviour {
         transform.position += velocity * Time.deltaTime;
 
         //decay velocity, x,z only
-        if (!isJumping)
+        if (!isJumping && correctionTimer < 0)
         {
             float y = velocity.y;
             velocity *= friction;
             velocity.Set(velocity.x, y, velocity.z);
         }
 
-        
+        //clear out the move force each frame
+        moveForce *= 0;
     }
-    
 
+    float boundsTimer = 0;
     bool isOutOfBounds(bool isOnSurface)
     {
         
@@ -246,18 +251,10 @@ public class PlayerMotion : MonoBehaviour {
 
         bool ret = false;
 
-        if (correctionTimer > 0)
+        if (!isOnSurface && correctionTimer < 0)
         {
 
-            //reset timer after 1 second
-            if (Time.time - correctionTimer > 0.3)
-                correctionTimer = -1;
-
-        }
-        if (!isOnSurface && correctionTimer == -1)
-        {
-
-            Debug.Log("correct player pos");
+            Debug.Log("correct player pos bounds");
 
             //teleport to last spot that was okay
             transform.position = lastGoodPosition[0];
@@ -266,16 +263,24 @@ public class PlayerMotion : MonoBehaviour {
             //frames of correction, return 
             velocity *= 0;
             correctionTimer = Time.time;
+
+
+
             ret = true;
+
+
         }
         else
         {
             //shove everyone down
-            for (int i = 0; i < lastGoodPosition.Length - 1; i ++ )
+            if (Time.time - boundsTimer > 0.2)
             {
-                lastGoodPosition[i] = lastGoodPosition[i+1];
+                for (int i = 0; i < lastGoodPosition.Length - 1; i++)
+                {
+                    lastGoodPosition[i] = lastGoodPosition[i + 1];
+                }
+                boundsTimer = Time.time;
             }
-
             
             lastGoodPosition[lastGoodPosition.Length - 1] = transform.position;
 
@@ -412,7 +417,15 @@ public class PlayerMotion : MonoBehaviour {
             //when correcting surface placement
             if (correctionTimer < 0)
             {
-                velocity = transform.forward * -10.0f;           //bounce once (hopefully)
+                velocity *= -3.0f;           //bounce once (hopefully)
+
+                Debug.Log("correct player pos collide");
+
+                //teleport to last spot that was okay
+                transform.position = lastGoodPosition[0];
+
+                correctionTimer = Time.time;
+
             }
 
             isJumping = false;
