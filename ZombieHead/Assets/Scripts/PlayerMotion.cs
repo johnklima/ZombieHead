@@ -355,7 +355,9 @@ public class PlayerMotion : MonoBehaviour {
 		{
 			//hide powerup on contact
 			other.gameObject.SetActive (false);
-		}
+            energy += 1.0f;
+
+        }
 
     }
   
