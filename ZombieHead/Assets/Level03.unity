@@ -1205,7 +1205,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1107969068}
   CameraTargets: {fileID: 2134809157}
-  lookRate: 3
+  lookRate: 1
   targetToCamera: 1
   targetToPlayer: 0
 --- !u!1 &1390563438

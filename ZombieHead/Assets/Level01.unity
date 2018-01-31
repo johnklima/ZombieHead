@@ -3070,7 +3070,7 @@ Transform:
   m_LocalScale: {x: 20, y: 2, z: 20}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 85.123, y: 0, z: 0}
 --- !u!1 &283284628
 GameObject:
@@ -13654,7 +13654,7 @@ Transform:
   - {fileID: 968311046}
   - {fileID: 1498071201}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1315999105
 GameObject:
@@ -17205,7 +17205,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4984010136862456, guid: ec491ebb19eb9864db8a84b5baaec469, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1658293790903648, guid: ec491ebb19eb9864db8a84b5baaec469, type: 2}
       propertyPath: m_TagString
@@ -17848,7 +17848,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 642.482, z: 0}
 --- !u!114 &1389773060
 MonoBehaviour:
@@ -17863,7 +17863,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1792661806}
   CameraTargets: {fileID: 817779160}
-  lookRate: 3
+  lookRate: 1
   targetToCamera: 1
   targetToPlayer: 0
 --- !u!1 &1398469473
@@ -21760,7 +21760,7 @@ Transform:
   m_LocalScale: {x: 20, y: 1, z: 20}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: -67.44601, y: 0, z: 0}
 --- !u!1 &1516438001
 GameObject:
@@ -22721,7 +22721,7 @@ Transform:
   - {fileID: 164998634}
   - {fileID: 817779160}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1582889788
 GameObject:
@@ -23776,7 +23776,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4107052038867884, guid: ed9a8e94511fa4a439aa4e4ad76775d9, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114040691348005868, guid: ed9a8e94511fa4a439aa4e4ad76775d9,
         type: 2}
@@ -24834,10 +24834,6 @@ MonoBehaviour:
   zmove: 0
   xmove: 0
   terrainHeight: 0
-  lastGoodPosition:
-  - {x: 0, y: 0, z: 4.4361687e-33}
-  - {x: 0, y: 0, z: 4.4361687e-33}
-  - {x: 0, y: 0, z: 4.4361687e-33}
   curPos: 0
   hillForceDir: {x: 0, y: 0, z: 0}
   hillAngle: 0

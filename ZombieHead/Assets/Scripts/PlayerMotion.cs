@@ -51,9 +51,7 @@ public class PlayerMotion : MonoBehaviour {
     public float zmove = 0;
     public float xmove = 0;
     public float terrainHeight = 0;
-
-    private Vector3[] lastGoodPosition = new Vector3[8];
-
+        
     public int curPos = 0;
 
     //HILL handling 
@@ -78,9 +76,6 @@ public class PlayerMotion : MonoBehaviour {
         //ensure character restart
         windTimer = 0;
         isDead = false;
-
-        for(int i = 0; i < lastGoodPosition.Length; i++)
-            lastGoodPosition[i] = transform.position;
 
         correctionTimer = -1;
 
@@ -284,18 +279,6 @@ public class PlayerMotion : MonoBehaviour {
         }
         else
         {
-            //shove everyone down
-            if (Time.time - boundsTimer > 0.2)
-            {
-                for (int i = 0; i < lastGoodPosition.Length - 1; i++)
-                {
-                    lastGoodPosition[i] = lastGoodPosition[i + 1];
-                }
-                boundsTimer = Time.time;
-            }
-            
-            lastGoodPosition[lastGoodPosition.Length - 1] = transform.position;
-
             ret = false;
         }
         return ret;

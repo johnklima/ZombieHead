@@ -30,7 +30,7 @@ public class FollowPlayer : MonoBehaviour {
         Vector3 campos = new Vector3(x, y, z);
 
         float t = Time.deltaTime;
-        campos = Vector3.Slerp(transform.position, campos, t * lookRate);
+        campos = Vector3.Slerp(transform.position, campos, t * lookRate * 0.5f);
         campos.Set(campos.x, campos.y, z);
         transform.position = campos;
         
