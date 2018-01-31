@@ -94,6 +94,9 @@ public class PlayerMotion : MonoBehaviour {
     {
 
 
+        //TODO:
+        energy = 1.0f;
+
         if (isDead)
             return;
 
@@ -403,7 +406,7 @@ public class PlayerMotion : MonoBehaviour {
             playerHealth.BloodSplatter();
             //TODO: enhance this effect
             //pick a random direction and throw the player
-            velocity.Set(Random.RandomRange(-1, 1), Random.RandomRange(-1, 1), Random.RandomRange(-1, 1));
+            velocity.Set(Random.Range(-1, 1), Random.RandomRange(-1, 1), Random.RandomRange(-1, 1));
             velocity.Normalize();
             velocity *= 3.0f;
         }
@@ -414,11 +417,12 @@ public class PlayerMotion : MonoBehaviour {
             isDead = true;
             return;
         }
-		else if (other.gameObject.tag == "PickUpEnergy")
-		{
-			//hide powerup on contact
-			other.gameObject.SetActive (false);
-            energy += 1.0f;
+        else if (other.gameObject.tag == "PickUpEnergy")
+        {
+            //hide powerup on contact
+            other.gameObject.SetActive(false);
+            energy += 0.3f;
+        }
         else
         {
             //TODO: improve collision handling  
@@ -428,7 +432,7 @@ public class PlayerMotion : MonoBehaviour {
                 velocity *= -1;           //bounce once (hopefully)
 
             isJumping = false;
-           
+
 
 
         }
