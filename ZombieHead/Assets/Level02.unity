@@ -954,7 +954,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 2078738181}
   CameraTargets: {fileID: 910503928}
-  lookRate: 3
+  lookRate: 1
   targetToCamera: 1
   targetToPlayer: 0
 --- !u!1 &1514063254
@@ -1922,10 +1922,6 @@ MonoBehaviour:
   zmove: 0
   xmove: 0
   terrainHeight: 0
-  lastGoodPosition:
-  - {x: 0, y: 0, z: 4.4361687e-33}
-  - {x: 0, y: 0, z: 4.4361687e-33}
-  - {x: 0, y: 0, z: 4.4361687e-33}
   curPos: 0
   hillForceDir: {x: 0, y: 0, z: 0}
   hillAngle: 0

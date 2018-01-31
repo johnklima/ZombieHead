@@ -51,9 +51,7 @@ public class PlayerMotion : MonoBehaviour {
     public float zmove = 0;
     public float xmove = 0;
     public float terrainHeight = 0;
-
-    public Vector3[] lastGoodPosition = new Vector3[8] { Vector3.zero , Vector3.zero , Vector3.zero , Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero };
-
+        
     public int curPos = 0;
 
     //HILL handling 
@@ -69,6 +67,7 @@ public class PlayerMotion : MonoBehaviour {
 
     //float used to fix player position when at the edge of a walkable
     float correctionTimer = -1;
+    Vector3 invertedForward = new Vector3(0, 0, 0);
 
     // Use this for initialization
     void Start ()
@@ -78,11 +77,9 @@ public class PlayerMotion : MonoBehaviour {
         windTimer = 0;
         isDead = false;
 
-        for(int i = 0; i < lastGoodPosition.Length; i++)
-            lastGoodPosition[i] = transform.position;
-
         correctionTimer = -1;
 
+        Update();
 
         //Getting reference to PlayerHealth.cs on start.
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerHealth>();
@@ -100,15 +97,8 @@ public class PlayerMotion : MonoBehaviour {
         if (isDead)
             return;
 
-        if (Time.time - correctionTimer > 1)
-        {
 
-            //reset timer after some seconds
-            
-                correctionTimer = -1;
-
-        }
-
+        
 
         //TODO: add powerups and start decrementing energy
         //energy = 1;
@@ -128,9 +118,26 @@ public class PlayerMotion : MonoBehaviour {
             }           
            
         }
-            
+
+        if (correctionTimer > 0)
+        {
+            Debug.Log("CORRECTING");
+            Vector3.Slerp(transform.position, transform.position + invertedForward, Time.deltaTime * 100.0f);
+         
+        }
+
+
         handleMovement();
-        
+
+        if (Time.time - correctionTimer > 1)
+        {
+
+            //reset timer after some seconds
+            Debug.Log("CORRECTION RESET");
+            correctionTimer = -1;
+
+        }
+
         //we always deal with terrain and player facing
         isOnSurface = handleTerrain();
         handleFacing();
@@ -256,13 +263,13 @@ public class PlayerMotion : MonoBehaviour {
 
             Debug.Log("correct player pos bounds");
 
-            //teleport to last spot that was okay
-            transform.position = lastGoodPosition[0];
+           
 
             //invert velocity, start a timer to handle several
             //frames of correction, return 
-            velocity *= 0;
             correctionTimer = Time.time;
+            invertedForward = transform.forward * -10.0f;
+            velocity *= -0.5f;           //bounce once (hopefully)
 
 
 
@@ -272,18 +279,6 @@ public class PlayerMotion : MonoBehaviour {
         }
         else
         {
-            //shove everyone down
-            if (Time.time - boundsTimer > 0.2)
-            {
-                for (int i = 0; i < lastGoodPosition.Length - 1; i++)
-                {
-                    lastGoodPosition[i] = lastGoodPosition[i + 1];
-                }
-                boundsTimer = Time.time;
-            }
-            
-            lastGoodPosition[lastGoodPosition.Length - 1] = transform.position;
-
             ret = false;
         }
         return ret;
@@ -330,7 +325,11 @@ public class PlayerMotion : MonoBehaviour {
 
         isOnPlatform = false;
 
-        if (Physics.Raycast(raycastPoint, -Vector3.up, out hit, 100, layerMask))
+        float raycastDistance = 8;
+        if (isJumping)
+            raycastDistance = 100;   //need a large raycast distance when in the air
+
+        if (Physics.Raycast(raycastPoint, -Vector3.up, out hit, raycastDistance, layerMask))
         {
 
             h = hit.point.y;
@@ -417,12 +416,10 @@ public class PlayerMotion : MonoBehaviour {
             //when correcting surface placement
             if (correctionTimer < 0)
             {
-                velocity *= -3.0f;           //bounce once (hopefully)
+                invertedForward = transform.forward * -10.0f;
+                velocity *= -0.5f;           //bounce once (hopefully)
 
                 Debug.Log("correct player pos collide");
-
-                //teleport to last spot that was okay
-                transform.position = lastGoodPosition[0];
 
                 correctionTimer = Time.time;
 
