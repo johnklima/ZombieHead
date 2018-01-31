@@ -1896,7 +1896,7 @@ MonoBehaviour:
   hillFactor: 30
   hillPolyNorm: {x: 0, y: 0, z: 0}
   windForce: {x: 0, y: 0, z: 0}
-  windFactor: 1
+  windFactor: 0.2
 --- !u!65 &2078738180
 BoxCollider:
   m_ObjectHideFlags: 0
