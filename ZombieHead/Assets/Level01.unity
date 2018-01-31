@@ -36805,6 +36805,10 @@ Prefab:
       propertyPath: m_Name
       value: ZombiePrefabBenjamin
       objectReference: {fileID: 0}
+    - target: {fileID: 1763662458640966, guid: ed9a8e94511fa4a439aa4e4ad76775d9, type: 2}
+      propertyPath: m_Name
+      value: BenjaminIdleAnimation
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114040691348005868, guid: ed9a8e94511fa4a439aa4e4ad76775d9, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: ed9a8e94511fa4a439aa4e4ad76775d9, type: 2}
