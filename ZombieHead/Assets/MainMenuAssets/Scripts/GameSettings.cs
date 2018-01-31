@@ -1,16 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿[System.Serializable]
 
-public class GameSettings : MonoBehaviour {
+public class GameSettings //: MonoBehaviour 
+	{
+	public int resolutionList;
+	public float mainVolume;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }
