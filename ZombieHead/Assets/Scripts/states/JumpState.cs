@@ -50,7 +50,7 @@ public class  JumpState: StateNode
 
             rootState.playermotion.jumpForce = rootState.playermotion.velocity
                                              + rootState.playermotion.transform.forward * 100.0f
-                                             + rootState.playermotion.transform.up * 1000.0f;
+                                             + rootState.playermotion.transform.up * 700.0f;
 
             Debug.Log("Jump init");
 
@@ -74,7 +74,7 @@ public class  JumpState: StateNode
                 if(rootState.playermotion.isJumping == false)
                     stateProgress = (int)StateProgessStates.Land;
 
-                if (rootState.playermotion.gameObject.transform.position.y < rootState.playermotion.terrainHeight)
+                if (rootState.playermotion.gameObject.transform.position.y < rootState.playermotion.terrainHeight + 0.1f)
                     stateProgress = (int)StateProgessStates.Land;
                 
             }
@@ -84,6 +84,7 @@ public class  JumpState: StateNode
                 Debug.Log("Land");
                 rootState.playermotion.jump.enabled = false;
                 rootState.playermotion.isJumping = false;
+                rootState.playermotion.velocity *= 0.2f;
                 p_isInState = false;
             }
 

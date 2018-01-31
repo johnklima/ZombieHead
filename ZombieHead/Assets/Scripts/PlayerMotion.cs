@@ -136,7 +136,7 @@ public class PlayerMotion : MonoBehaviour {
 
         float wf = Mathf.Sin(windTimer);
         windForce.Set(0, 0.0f, wf);
-        windForce *= MAX_WIND_CONSTANT * windFactor;
+        windForce *= MAX_WIND_CONSTANT ;
          
 
     }
@@ -213,7 +213,7 @@ public class PlayerMotion : MonoBehaviour {
         if (ang < 0)
             wf = windForce * -1;
 
-        totalForce += windForce;
+        totalForce += windForce * windFactor;
         
         
         acceleration = totalForce / mass;
@@ -232,29 +232,7 @@ public class PlayerMotion : MonoBehaviour {
 
         
     }
-    //this method applies just wind force as a position modifier
-    //when we are in special movement such as jumping
-    public void applyWind()
-    {
-
-        totalForce = windForce;
-
-        acceleration = totalForce / mass;
-        velocity += acceleration * Time.deltaTime;
-
-        //move the player
-        transform.position += velocity * Time.deltaTime;
-
-
-        //decay velocity, x,z only - TODO: this is wrong in the air, but...
-        float y = velocity.y;
-        velocity *= friction;
-        velocity.Set(velocity.x, y, velocity.z);
-
-
-
-    }
-
+    
 
     bool isOutOfBounds(bool isOnSurface)
     {
@@ -282,7 +260,7 @@ public class PlayerMotion : MonoBehaviour {
 
             //invert velocity, start a timer to handle several
             //frames of correction, return 
-            velocity *= -1;
+            velocity *= 0;
             correctionTimer = Time.time;
             ret = true;
         }
@@ -429,7 +407,9 @@ public class PlayerMotion : MonoBehaviour {
             //correctionTimer ignores physics collisions 
             //when correcting surface placement
             if (correctionTimer < 0)
-                velocity *= -1;           //bounce once (hopefully)
+            {
+                velocity = transform.forward * -50.0f;           //bounce once (hopefully)
+            }
 
             isJumping = false;
 
