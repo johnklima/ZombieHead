@@ -213,7 +213,11 @@ public class PlayerMotion : MonoBehaviour {
         if (ang < 0)
             wf = windForce * -1;
 
-        totalForce += windForce * windFactor;
+
+        if(isJumping)
+            totalForce += windForce * windFactor * 3.0f;
+        else
+            totalForce += windForce * windFactor;
         
         
         acceleration = totalForce / mass;
@@ -408,7 +412,7 @@ public class PlayerMotion : MonoBehaviour {
             //when correcting surface placement
             if (correctionTimer < 0)
             {
-                velocity = transform.forward * -50.0f;           //bounce once (hopefully)
+                velocity = transform.forward * -10.0f;           //bounce once (hopefully)
             }
 
             isJumping = false;
