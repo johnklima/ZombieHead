@@ -4298,7 +4298,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 643056275}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -4338,7 +4338,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 643056275}
   m_LocalRotation: {x: -0.6754067, y: -0, z: -0, w: 0.73744553}
-  m_LocalPosition: {x: -11.2, y: -15.25, z: 106.12}
+  m_LocalPosition: {x: -11.2, y: -16.62, z: 106.95}
   m_LocalScale: {x: 20, y: 1, z: 40}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5614,9 +5614,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
-  m_InflateMesh: 0
-  m_SkinWidth: 0.01
+  m_Convex: 1
+  m_InflateMesh: 1
+  m_SkinWidth: 1
   m_Mesh: {fileID: 4300148, guid: bae739c14906b734188c237115d2d379, type: 3}
 --- !u!23 &857967945
 MeshRenderer:
@@ -22778,6 +22778,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocity: {x: 0, y: 0, z: 0}
   acceleration: {x: 0, y: 0, z: 0}
+  jumpForce: {x: 0, y: 0, z: 0}
   moveForce: {x: 0, y: 0, z: 0}
   totalForce: {x: 0, y: 0, z: 0}
   walk: {fileID: 1792661813}
@@ -22796,7 +22797,6 @@ MonoBehaviour:
   groundOffset: 1
   groundRate: 1
   isJumping: 0
-  isFalling: 0
   isOnPlatform: 0
   isOnSurface: 1
   isDead: 0
@@ -23249,9 +23249,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
-  m_InflateMesh: 0
-  m_SkinWidth: 0.01
+  m_Convex: 1
+  m_InflateMesh: 1
+  m_SkinWidth: 1
   m_Mesh: {fileID: 4300150, guid: bae739c14906b734188c237115d2d379, type: 3}
 --- !u!23 &1804260183
 MeshRenderer:
