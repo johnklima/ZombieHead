@@ -345,7 +345,7 @@ public class PlayerMotion : MonoBehaviour {
         else if (other.gameObject.tag == "Spikes")
         {
             //we are totally dead
-            velocity *= 0;
+            velocity *= 0.2f;
             isDead = true;
             lastGoodPosition = transform.position;
 
