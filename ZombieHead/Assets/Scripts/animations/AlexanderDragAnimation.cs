@@ -24,8 +24,8 @@ public class AlexanderDragAnimation : AnimationScript
 
     //accumulated tranformations on my spheres
     Vector3 curThead = new Vector3();
-    Vector3 curTlegleft = new Vector3();
-    Vector3 curTlegright = new Vector3();
+    // Vector3 curTlegleft = new Vector3();
+    // Vector3 curTlegright = new Vector3();
     Vector3 curTarmleft = new Vector3();
     Vector3 curTarmright = new Vector3();
 
@@ -33,19 +33,19 @@ public class AlexanderDragAnimation : AnimationScript
 
     //animation targe spheres in the scene (the red spheres)
     public Transform targetHead;
-    public Transform targetLegLeft;
-    public Transform targetLegRight;
+    // public Transform targetLegLeft;
+    // public Transform targetLegRight;
     public Transform targetArmLeft;
     public Transform targetArmRight;
 
     public Vector3[] positionArray = new Vector3[4];
     public int curPosition = 0;
 
-    public float zlegLeft;
-    public float zlegRight;
+    public float zarmLeft;
+    public float zarmRight;
 
-    public float ylegLeft;
-    public float ylegRight;
+    public float yarmLeft;
+    public float yarmRight;
 
 
     // Use this for initialization
@@ -87,18 +87,18 @@ public class AlexanderDragAnimation : AnimationScript
         }
 
 
-        zlegLeft = Mathf.Sin(  frequency * Time.time + Mathf.PI  ) * amplitude;
-        zlegRight = Mathf.Sin(  frequency * Time.time            ) * amplitude;
+        zarmLeft = Mathf.Sin(  frequency * Time.time + Mathf.PI  ) * amplitude;
+        zarmRight = Mathf.Sin(  frequency * Time.time            ) * amplitude;
 
-        ylegLeft = Mathf.Sin(frequency * Time.time ) * amplitude + 5.0f;
-        ylegRight = Mathf.Sin(frequency * Time.time + Mathf.PI) * amplitude + 5.0f;
+        yarmLeft = Mathf.Sin(frequency * Time.time ) * amplitude + 5.0f;
+        yarmRight = Mathf.Sin(frequency * Time.time + Mathf.PI) * amplitude + 5.0f;
 
 
-        curTlegleft.Set(targetLegLeft.localPosition.x, ylegLeft, zlegLeft);
-        targetLegLeft.localPosition = curTlegleft;
+        curTarmleft.Set(targetArmLeft.localPosition.x, yarmLeft, zarmLeft);
+        targetArmLeft.localPosition = curTarmleft;
 
-        curTlegright.Set(targetLegRight.localPosition.x, ylegRight, zlegRight);
-        targetLegRight.localPosition = curTlegright;
+        curTarmright.Set(targetArmRight.localPosition.x, yarmRight, zarmRight);
+        targetArmRight.localPosition = curTarmright;
 
 
         /*
