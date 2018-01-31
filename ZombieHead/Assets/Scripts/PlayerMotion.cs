@@ -12,6 +12,8 @@ public class PlayerMotion : MonoBehaviour {
     public Vector3 velocity = new Vector3(0, 0, 0);             //current direction and speed of movement
     public Vector3 acceleration = new Vector3(0, 0, 0);         //movement controlled by player movement force and gravity
 
+    public Vector3 jumpForce = new Vector3(0, 0, 0);            //set in jump state
+
     public Vector3 moveForce = new Vector3(0, 0, 0);            //combined force of all axis from input for move
     public Vector3 totalForce = new Vector3(0, 0, 0);           //total of ALL forces applied
 
@@ -43,15 +45,17 @@ public class PlayerMotion : MonoBehaviour {
 
     //surface/walkable handling
     public bool isJumping = false;
-    public bool isFalling = false;
     public bool isOnPlatform = false;
     public bool isOnSurface = true;
     public bool isDead = false;
     public float zmove = 0;
     public float xmove = 0;
     public float terrainHeight = 0;
-    public Vector3 lastGoodPosition = new Vector3(0, 0, 0);
-    
+
+    public Vector3[] lastGoodPosition = new Vector3[8] { Vector3.zero , Vector3.zero , Vector3.zero , Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero };
+
+    public int curPos = 0;
+
     //HILL handling 
     public Vector3 hillForceDir;
     public float hillAngle;
@@ -63,13 +67,22 @@ public class PlayerMotion : MonoBehaviour {
     public float windFactor = 1.0f;                     //scalar to tweek wind effect 
     private float windTimer = 0;
 
+    //float used to fix player position when at the edge of a walkable
+    float correctionTimer = -1;
+
     // Use this for initialization
     void Start ()
     {
 
+        //ensure character restart
         windTimer = 0;
         isDead = false;
-        lastGoodPosition = transform.position;
+
+        for(int i = 0; i < lastGoodPosition.Length; i++)
+            lastGoodPosition[i] = transform.position;
+
+        correctionTimer = -1;
+
 
         //Getting reference to PlayerHealth.cs on start.
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerHealth>();
@@ -81,24 +94,43 @@ public class PlayerMotion : MonoBehaviour {
     {
 
 
+        //TODO:
+        energy = 1.0f;
+
         if (isDead)
             return;
+
+        if (Time.time - correctionTimer > 1)
+        {
+
+            //reset timer after some seconds
+            
+                correctionTimer = -1;
+
+        }
+
 
         //TODO: add powerups and start decrementing energy
         //energy = 1;
 
         //make sure we are within the defined bounds of our level
-        //isOutOfBounds returns True if we are out of bounds
-        if (isOutOfBounds(isOnSurface) == false && !isDead)
+        //isOutOfBounds returns True if we are out of bounds.
+        //correctionTimer maintains a reverse velocity for one second
+        //to get player back on walkable surface
+        bool outbounds = isOutOfBounds(isOnSurface);
+        if (!outbounds && !isDead && correctionTimer < 0)
         {
-            //all good so buffer last good position
-            lastGoodPosition = transform.position;
 
-            //all good so do key input and movement
-            handleInput();
-            handleMovement();
+            //all good so do key input and movement if allowed
+            if (!isJumping)
+            {
+                handleInput();
+            }           
+           
         }
-
+            
+        handleMovement();
+        
         //we always deal with terrain and player facing
         isOnSurface = handleTerrain();
         handleFacing();
@@ -109,7 +141,7 @@ public class PlayerMotion : MonoBehaviour {
 
         float wf = Mathf.Sin(windTimer);
         windForce.Set(0, 0.0f, wf);
-        windForce *= MAX_WIND_CONSTANT * windFactor;
+        windForce *= MAX_WIND_CONSTANT ;
          
 
     }
@@ -121,8 +153,7 @@ public class PlayerMotion : MonoBehaviour {
     void handleInput()
     {
         
-        //clear out the move force each frame
-        moveForce *= 0;
+        
         Debug.Log("handle movement");
 
         //TODO: enable energy consumption
@@ -162,16 +193,21 @@ public class PlayerMotion : MonoBehaviour {
     void handleMovement()
     {
         //initial force of gravity
-        if(isJumping)                           //we want absolute control of jump
-            totalForce.Set(0, 0.0f , 0);
-        else
-            totalForce.Set(0, 1.0f, 0);
+        totalForce.Set(0, 1.0f, 0);
 
         totalForce *= GRAVITY_CONSTANT;
 
         //add our character moveForce
-        totalForce += moveForce;
-        totalForce += hillForceDir;
+        if (!isJumping)
+        {
+            totalForce += hillForceDir;
+            totalForce += moveForce;
+        }
+
+        totalForce += jumpForce;
+
+        //jump is an impulse, apply once
+        jumpForce *= 0;
 
         //compare wind direction to our movement direction
         Vector3 mf = windForce.normalized;
@@ -181,7 +217,11 @@ public class PlayerMotion : MonoBehaviour {
         if (ang < 0)
             wf = windForce * -1;
 
-        totalForce += windForce;
+
+        if(isJumping)
+            totalForce += windForce * windFactor * 3.0f;
+        else
+            totalForce += windForce * windFactor;
         
         
         acceleration = totalForce / mass;
@@ -190,46 +230,60 @@ public class PlayerMotion : MonoBehaviour {
         //move the player
         transform.position += velocity * Time.deltaTime;
 
-        //decay velocity
-        float y = velocity.y;
-        if (!isFalling)
+        //decay velocity, x,z only
+        if (!isJumping && correctionTimer < 0)
         {
+            float y = velocity.y;
             velocity *= friction;
+            velocity.Set(velocity.x, y, velocity.z);
         }
 
-        velocity.Set(velocity.x, y, velocity.z);
-        
+        //clear out the move force each frame
+        moveForce *= 0;
     }
 
+    float boundsTimer = 0;
     bool isOutOfBounds(bool isOnSurface)
     {
         
         //keep the player within bounds
 
-        /*
-         * here we are using absolute world coordinates, bad.'
-         * two ways to do this, way one, get the x,z bounds of the terrain
-         * way two, if we don't intersect said terrain for the terrain follow code
-         * we are out of bounds, but we still need to limit x axis motion for
-         * camera reasons
-         * 
-         */
 
         bool ret = false;
 
-        if (!isOnSurface)
+        if (!isOnSurface && correctionTimer < 0)
         {
 
-            Debug.Log("not on surface???");
+            Debug.Log("correct player pos bounds");
 
-            transform.position = lastGoodPosition;
+            //teleport to last spot that was okay
+            transform.position = lastGoodPosition[0];
 
-            //TODO: angle of incidence == angle of refraction, assume perpendicular plane 
-            velocity *= -1;
+            //invert velocity, start a timer to handle several
+            //frames of correction, return 
+            velocity *= 0;
+            correctionTimer = Time.time;
+
+
+
             ret = true;
+
+
         }
         else
         {
+            //shove everyone down
+            if (Time.time - boundsTimer > 0.2)
+            {
+                for (int i = 0; i < lastGoodPosition.Length - 1; i++)
+                {
+                    lastGoodPosition[i] = lastGoodPosition[i + 1];
+                }
+                boundsTimer = Time.time;
+            }
+            
+            lastGoodPosition[lastGoodPosition.Length - 1] = transform.position;
+
             ret = false;
         }
         return ret;
@@ -330,32 +384,53 @@ public class PlayerMotion : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("OnTriggerEnter " + other.name);
-        transform.position = lastGoodPosition;
-        
-        //TODO: improve collision handling        
-        velocity *= -1;           //bounce
+
 
         if (other.gameObject.tag == "NPCcollision")
         {
             Debug.Log("WORM BITES ME");
             energy -= 0.2f;
             playerHealth.BloodSplatter();
+            //TODO: enhance this effect
+            //pick a random direction and throw the player
+            velocity.Set(Random.Range(-1, 1), Random.RandomRange(-1, 1), Random.RandomRange(-1, 1));
+            velocity.Normalize();
+            velocity *= 3.0f;
         }
-
         else if (other.gameObject.tag == "Spikes")
         {
             //we are totally dead
             velocity *= 0.2f;
             isDead = true;
-            lastGoodPosition = transform.position;
-
+            return;
         }
+        else if (other.gameObject.tag == "PickUpEnergy")
+        {
+            //hide powerup on contact
+            other.gameObject.SetActive(false);
+            energy += 0.3f;
+        }
+        else
+        {
+            //TODO: improve collision handling  
+            //correctionTimer ignores physics collisions 
+            //when correcting surface placement
+            if (correctionTimer < 0)
+            {
+                velocity *= -3.0f;           //bounce once (hopefully)
 
-		if (other.gameObject.tag == "PickUpEnergy")
-		{
-			//hide powerup on contact
-			other.gameObject.SetActive (false);
-            energy += 1.0f;
+                Debug.Log("correct player pos collide");
+
+                //teleport to last spot that was okay
+                transform.position = lastGoodPosition[0];
+
+                correctionTimer = Time.time;
+
+            }
+
+            isJumping = false;
+
+
 
         }
 
