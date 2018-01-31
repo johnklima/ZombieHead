@@ -219,7 +219,7 @@ public class PlayerMotion : MonoBehaviour {
 
 
         if(isJumping)
-            totalForce += windForce * windFactor * 3.0f;
+            totalForce += windForce * windFactor * 2.0f;
         else
             totalForce += windForce * windFactor;
         
