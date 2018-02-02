@@ -8,21 +8,21 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MainMenuAssets/MainMenu.unity
     guid: 008e674a6f53b9a4ea6da221259252d5
-  - enabled: 1
+  - enabled: 0
     path: Assets/New_Level01.unity
     guid: 7315778bed4fcda4893de38e7d018658
-  - enabled: 1
+  - enabled: 0
     path: Assets/New_Level02.unity
     guid: 4ef149bec22b54c4db5a556bac5b350a
-  - enabled: 1
+  - enabled: 0
     path: Assets/New_Level03.unity
     guid: 4a79afd0f3b53ad4981f303bcd32e05d
-  - enabled: 0
+  - enabled: 1
     path: Assets/Level01.unity
     guid: 8f4352e0320c598478ecdaafc4245edf
-  - enabled: 0
+  - enabled: 1
     path: Assets/Level02.unity
     guid: b5b7dcfc22ec76040ad6fd053f26d65b
-  - enabled: 0
+  - enabled: 1
     path: Assets/Level03.unity
     guid: b99db01371c668c458dbc696a08564d7

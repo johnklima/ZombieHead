@@ -60,25 +60,25 @@ public class LevelManager : MonoBehaviour {
 
     public void LoadMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene(0);
         Debug.Log("Main Menu loaded.");
     }
 
     public void LoadLevel01()
     {
-        SceneManager.LoadScene("New_Level01");
+        SceneManager.LoadScene(1);
         Debug.Log("Level01 loaded.");
     }
 
     public void LoadLevel02()
     {
-        SceneManager.LoadScene("New_Level02");
+        SceneManager.LoadScene(2);
         Debug.Log("Level02 loaded.");
     }
 
     public void LoadLevel03()
     {
-        SceneManager.LoadScene("New_Level03");
+        SceneManager.LoadScene(3);
         Debug.Log("Level03 loaded.");
     }
 }
