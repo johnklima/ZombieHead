@@ -427,7 +427,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 48176616}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab18c5f0136d4cd4e881e3b129eeea22, type: 3}
   m_Name: 
@@ -6134,6 +6134,7 @@ GameObject:
   - component: {fileID: 1107969061}
   - component: {fileID: 1107969060}
   - component: {fileID: 1107969059}
+  - component: {fileID: 1107969070}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -6240,7 +6241,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1107969058}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a691141dc4696424caf99eb31f5a782f, type: 3}
   m_Name: 
@@ -6251,11 +6252,11 @@ MonoBehaviour:
   moveForce: {x: 0, y: 0, z: 0}
   totalForce: {x: 0, y: 0, z: 0}
   walk: {fileID: 1107969060}
-  idle: {fileID: 1107969061}
+  idle: {fileID: 48176618}
   jump: {fileID: 1107969062}
   roll: {fileID: 1107969059}
   squirm: {fileID: 0}
-  drag: {fileID: 0}
+  drag: {fileID: 1107969070}
   mass: 1
   energy: 1
   verticalForce: 18
@@ -6318,6 +6319,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WindSlider: {fileID: 1136592499}
   NWindSlider: {fileID: 1396094594}
+  playerMotion: {fileID: 1107969066}
+--- !u!114 &1107969070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1107969058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b98fea09e9ea67244886adb9c4e3fc1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frequency: 2
+  xAmplitude: 1.5
+  yAmplitude: 1.5
+  zAmplitude: 1.5
+  phase: 0
+  targetHead: {fileID: 136565660}
+  targetArmLeft: {fileID: 1517154866}
+  targetArmRight: {fileID: 1956516262}
+  positionArrayRight:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  positionArrayLeft:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  curPosition: 0
+  dragFactor: 1
   playerMotion: {fileID: 1107969066}
 --- !u!1 &1108006239
 GameObject:

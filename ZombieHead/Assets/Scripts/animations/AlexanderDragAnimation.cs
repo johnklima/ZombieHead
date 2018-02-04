@@ -11,13 +11,15 @@ using UnityEngine;
  */
 
 
-public class AlexanderDragAnimation : AnimationScript
+public class AlexanderDragAnimation : AnimationScript // In case the 'actual' drag animation doesn't count.
 {
 
-    
+
 
     public float frequency = 2;
-    public float amplitude = 1.5f;
+    public float xAmplitude = 1.5f;
+    public float yAmplitude = 1.5f;
+    public float zAmplitude = 1.5f;
     public float phase = 0;
 
     Vector3 deltaT = new Vector3();
@@ -38,24 +40,33 @@ public class AlexanderDragAnimation : AnimationScript
     public Transform targetArmLeft;
     public Transform targetArmRight;
 
-    public Vector3[] positionArray = new Vector3[4];
+    public Vector3[] positionArrayRight = new Vector3[4];
+    public Vector3[] positionArrayLeft = new Vector3[4];
     public int curPosition = 0;
+    public float dragFactor = 0f;
 
-    public float zarmLeft;
-    public float zarmRight;
+    public PlayerMotion playerMotion;
 
-    public float yarmLeft;
-    public float yarmRight;
-
+    // public float zlegLeft;
+    // public float zlegRight;
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         phase = 0;
         localTime = 0;
 
-        
-        
+        //example of using an array of locations to move the target
+        positionArrayRight[0] = new Vector3(-0.2f, 0.5f, 0.5f);
+        positionArrayRight[1] = new Vector3(2f, 1f, 0.5f);
+        positionArrayRight[2] = new Vector3(1f, 1f, 2f);
+        positionArrayRight[3] = new Vector3(0.2f, 0.5f, 2f);
+        positionArrayLeft[0] = new Vector3(-0.2f, 0.5f, 0.5f);
+        positionArrayLeft[1] = new Vector3(-2f, 1f, 0.5f);
+        positionArrayLeft[2] = new Vector3(-1f, 1f, 2f);
+        positionArrayLeft[3] = new Vector3(-0.2f, 0.5f, 2f);
+        dragFactor = 0.01f;
+
     }
 
     // Update is called once per frame
@@ -63,56 +74,57 @@ public class AlexanderDragAnimation : AnimationScript
     {
 
         //accumulate our own local time to this object
-        localTime += Time.deltaTime;
+        localTime += playerMotion.velocity.magnitude * dragFactor;
 
-        Vector3 finalPos = positionArray[curPosition];
+        Vector3 finalRightArm = positionArrayRight[curPosition];
+        Vector3 finalLeftArm = positionArrayLeft[curPosition];
 
-        float z = Mathf.Sin((Time.time + Mathf.PI));
+        float z = Mathf.Sin((localTime + Mathf.PI));
 
-        finalPos.Set(finalPos.x, finalPos.y, finalPos.z + z);
+        finalRightArm.Set(finalRightArm.x, finalRightArm.y, finalRightArm.z + z);
+        finalLeftArm.Set(finalLeftArm.x, finalLeftArm.y, finalLeftArm.z + z);
 
 
-        targetArmRight.localPosition = Vector3.Slerp( targetArmRight.localPosition , 
-                                                      finalPos,
-                                                      Time.deltaTime * 10.0f       );
+        targetArmRight.localPosition = Vector3.Slerp(targetArmRight.localPosition,
+                                                      finalRightArm,
+                                                      localTime);
 
-        if (localTime > 1.0f)
+        targetArmLeft.localPosition = Vector3.Slerp(targetArmLeft.localPosition,
+                                                      finalLeftArm,
+                                                      localTime);
+
+        if (localTime > 4.0f)
         {
             curPosition++;
 
-            if (curPosition >= positionArray.Length)
+            if (curPosition >= positionArrayRight.Length)
                 curPosition = 0;
 
             localTime = 0;
         }
 
 
-        zarmLeft = Mathf.Sin(  frequency * Time.time + Mathf.PI  ) * amplitude;
-        zarmRight = Mathf.Sin(  frequency * Time.time            ) * amplitude;
+        // zlegLeft = Mathf.Sin(frequency * Time.time + Mathf.PI) * amplitude;
+        // zlegRight = Mathf.Sin(frequency * Time.time) * amplitude;
 
-        yarmLeft = Mathf.Sin(frequency * Time.time ) * amplitude + 5.0f;
-        yarmRight = Mathf.Sin(frequency * Time.time + Mathf.PI) * amplitude + 5.0f;
+        //  curTlegleft.Set(targetLegLeft.localPosition.x, targetLegLeft.localPosition.y, zlegLeft);
+        // targetLegLeft.localPosition = curTlegleft;
+
+        // curTlegright.Set(targetLegRight.localPosition.x, targetLegRight.localPosition.y, zlegRight);
+        // targetLegRight.localPosition = curTlegright;
 
 
-        curTarmleft.Set(targetArmLeft.localPosition.x, yarmLeft, zarmLeft);
-        targetArmLeft.localPosition = curTarmleft;
+        float y1 = Mathf.Sin(localTime + (phase + Mathf.PI * frequency)) * -yAmplitude;
+        float z1 = Mathf.Sin(localTime + (phase + Mathf.PI * frequency)) * -zAmplitude;
 
-        curTarmright.Set(targetArmRight.localPosition.x, yarmRight, zarmRight);
-        targetArmRight.localPosition = curTarmright;
+        curThead.Set(targetHead.localPosition.x, 1.0f + y1 + -yAmplitude - 1, 1.0f + z1 + zAmplitude + 0.2f);
+        targetHead.localPosition = curThead;
 
 
         /*
-
-        float z1 = Mathf.Sin( localTime + (phase + Mathf.PI * frequency) ) * amplitude;
         float z2 = Mathf.Sin( localTime + (phase + Mathf.PI * frequency) ) * amplitude;
         float z3 = Mathf.Sin((localTime + phase) * frequency) * amplitude;
-
-
-
-
-        curThead.Set(targetHead.localPosition.x, targetHead.localPosition.y, deltaT.z + z1);        
-        targetHead.localPosition = curThead;
-
+        
         curTarmleft.Set(targetArmLeft.localPosition.x, targetArmLeft.localPosition.y, deltaT.z + z2);
         targetArmLeft.localPosition = curTarmleft;
 

@@ -82,9 +82,9 @@ public class AlexanderIdle : AnimationScript // In case the 'actual' drag animat
         finalLeftArm.Set(finalLeftArm.x, finalLeftArm.y, finalLeftArm.z + z);
 
 
-        targetArmRight.localPosition = Vector3.Slerp(targetArmRight.localPosition,
-                                                      finalRightArm,
-                                                      Time.deltaTime * 4.0f);
+       // targetArmRight.localPosition = Vector3.Slerp(targetArmRight.localPosition, // Commenting it out so it's distinct from the actual Drag animation, so it can be seen in the State engine.
+       //                                               finalRightArm,
+       //                                               Time.deltaTime * 4.0f);
 
         targetArmLeft.localPosition = Vector3.Slerp(targetArmLeft.localPosition,
                                                       finalLeftArm,
