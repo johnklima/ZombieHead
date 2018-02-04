@@ -24,7 +24,7 @@ public class FollowPlayer : MonoBehaviour {
 
         //force the camera to follow the player
         float z = player.position.z;
-        float x = player.position.x  + camtarget.x + 10;
+        float x = player.position.x  + camtarget.x + 5;
         float y = player.position.y  + camtarget.y + 5;
 
         Vector3 campos = new Vector3(x, y, z);

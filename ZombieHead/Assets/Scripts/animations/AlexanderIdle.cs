@@ -114,7 +114,7 @@ public class AlexanderIdle : AnimationScript // In case the 'actual' drag animat
         float y1 = Mathf.Sin(Time.time + (phase + Mathf.PI * frequency)) * -yAmplitude;
         float z1 = Mathf.Sin(Time.time + (phase + Mathf.PI * frequency)) * -zAmplitude;
 
-        curThead.Set(targetHead.localPosition.x, deltaT.y + y1 + -yAmplitude - 1, deltaT.z + z1 + zAmplitude + 0.2f);
+        curThead.Set(targetHead.localPosition.x, 1.0f + y1 + -yAmplitude - 1, 1.0f + z1 + zAmplitude + 0.2f);
         targetHead.localPosition = curThead;
 
 
