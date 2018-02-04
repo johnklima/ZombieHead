@@ -7,6 +7,8 @@ public class WinCondition : MonoBehaviour
 
     public LevelManager levelManager;
 
+    public float delayTime = 2.0f;
+
     // Toggle current level on to load correct scene for next level.
     public bool level01;
     public bool level02;
@@ -20,16 +22,29 @@ public class WinCondition : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         // Load Level02
-        if(other.gameObject.tag == "Player" && level01 == true)
+        if (other.gameObject.tag == "Player" && level01 == true)
         {
-            levelManager.LoadLevel02();
+            StartCoroutine("DelayLoadLevel02");
         }
 
         // Load Level03
         if (other.gameObject.tag == "Player" && level02 == true)
         {
-            levelManager.LoadLevel03();
+            StartCoroutine("DelayLoadLevel03");
         }
     }
 
+    // Delaying loading for Level02.
+    IEnumerator DelayLoadLevel02()
+    {
+        yield return new WaitForSeconds(delayTime);
+        levelManager.LoadLevel02();
+    }
+
+    // Delaying loading for Level03.
+    IEnumerator DelayLoadLevel03()
+    {
+        yield return new WaitForSeconds(delayTime);
+        levelManager.LoadLevel03();
+    }
 }

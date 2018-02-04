@@ -156,5 +156,26 @@ public class PlayerHealth : MonoBehaviour
             //Lowers timeScale after death for a slow-motion effect.
             Time.timeScale = 0.2f;
         }
+
+        // Quick fix: We're using this method to declare axe damage as well.
+        if (collisionDamage.gameObject.tag == "Axe")
+        {
+            healthPoints -= 200.0f;
+            BloodSplatter();
+
+            //Lowers timeScale after death for a slow-motion effect.
+            Time.timeScale = 0.2f;
+        }
+
+        // Same with SpikeBall as with axes.
+        if (collisionDamage.gameObject.tag == "SpikeBall")
+        {
+            healthPoints -= 200.0f;
+            BloodSplatter();
+
+            //Lowers timeScale after death for a slow-motion effect.
+            Time.timeScale = 0.2f;
+        }
     }
+
 }
