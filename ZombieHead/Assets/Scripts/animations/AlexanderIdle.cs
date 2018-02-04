@@ -54,14 +54,14 @@ public class AlexanderIdle : AnimationScript // In case the 'actual' drag animat
         localTime = 0;
 
         //example of using an array of locations to move the target
-        positionArrayRight[0] = new Vector3(0.2f, 0.5f, 0.5f);
-        positionArrayRight[1] = new Vector3(0.2f, 1.5f, 0.5f);
-        positionArrayRight[2] = new Vector3(0.2f, 2f, 1f);
-        positionArrayRight[3] = new Vector3(0.2f, 1f, 0.8f);
+        positionArrayRight[0] = new Vector3(-0.2f, 0.5f, 0.5f);
+        positionArrayRight[1] = new Vector3(2f, 1f, 0.5f);
+        positionArrayRight[2] = new Vector3(1f, 1f, 2f);
+        positionArrayRight[3] = new Vector3(0.2f, 0.5f, 2f);
         positionArrayLeft[0] = new Vector3(-0.2f, 0.5f, 0.5f);
-        positionArrayLeft[1] = new Vector3(-0.2f, 1.5f, 1.0f);
-        positionArrayLeft[2] = new Vector3(-0.2f, 1.5f, 0.8f);
-        positionArrayLeft[3] = new Vector3(-0.2f, 1f, 0.5f);
+        positionArrayLeft[1] = new Vector3(-2f, 1f, 0.5f);
+        positionArrayLeft[2] = new Vector3(-1f, 1f, 2f);
+        positionArrayLeft[3] = new Vector3(-0.2f, 0.5f, 2f);
 
 
     }
