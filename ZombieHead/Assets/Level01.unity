@@ -425,7 +425,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 1067dc21892edc042a753b7aca7fe2d8, type: 2}
+  - {fileID: 2100000, guid: cdc1902e3692ce94e94df53745824b28, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -523,7 +523,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: cdc1902e3692ce94e94df53745824b28, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -659,7 +659,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: ece85b5fa78571749bf7cf0fd8c95e9e, type: 2}
+  - {fileID: 2100000, guid: cdc1902e3692ce94e94df53745824b28, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -942,7 +942,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: cdc1902e3692ce94e94df53745824b28, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5550,7 +5550,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: a0556ed32460c664989fdfcb358e7cae, type: 2}
+  - {fileID: 2100000, guid: cdc1902e3692ce94e94df53745824b28, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5850,7 +5850,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 9189d8884acc21e4c953c517a3fbd73b, type: 2}
+  - {fileID: 2100000, guid: cdc1902e3692ce94e94df53745824b28, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6010,7 +6010,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: ab1f266c110c66c40b2bda878f09e298, type: 2}
+  - {fileID: 2100000, guid: cdc1902e3692ce94e94df53745824b28, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9159,7 +9159,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: cdc1902e3692ce94e94df53745824b28, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9745,6 +9745,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelManager: {fileID: 0}
+  delayTime: 2
   level01: 1
   level02: 0
 --- !u!54 &1054256311
@@ -10650,7 +10651,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 867456397
+  randomSeed: 34374198
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -15796,7 +15797,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 867456397
+  randomSeed: -150573853
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -20441,7 +20442,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -496520970
+  randomSeed: 1347870427
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -24475,7 +24476,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: fc251fcbeb3e8774888559d98ab9a6a7, type: 2}
+  - {fileID: 2100000, guid: cdc1902e3692ce94e94df53745824b28, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -26776,7 +26777,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: f92c7e8b08185864b922f3aabcf4f70c, type: 2}
+  - {fileID: 2100000, guid: cdc1902e3692ce94e94df53745824b28, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -29168,7 +29169,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1509640455
+  randomSeed: 1134101283
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -33015,7 +33016,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -541383992
+  randomSeed: -614637944
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -36357,7 +36358,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 0b18a1f71c228fc448c38f270f9ddb84, type: 2}
+  - {fileID: 2100000, guid: cdc1902e3692ce94e94df53745824b28, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
